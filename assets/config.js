@@ -80,6 +80,54 @@ window.PRESENT_CLICKER_PRODUCERS = [
     basePps: 1000000,
     unlockAtPps: 2000000,
     requiresFlag: "dyslexiaUnlocked"
+  },
+  {
+    id: "infernal_reindeer_ranch",
+    name: "Infernal Reindeer Ranch",
+    description: "Flaming-hoofed reindeer haul presents through molten chimneys.",
+    flavor: "The hooves jingle and clatter. The smoke smells like cinnamon and brimstone.",
+    type: "ritual",
+    baseCost: 500000000,
+    costMultiplier: 1.32,
+    basePps: 8000000,
+    unlockAtPps: 10000000,
+    requiresFlag: "dyslexiaUnlocked"
+  },
+  {
+    id: "krampus_call_center",
+    name: "Krampus Call Center",
+    description: "Every unanswered complaint fuels another cursed gift shipment.",
+    flavor: "Hold music alternates between carols and distant, echoing chains.",
+    type: "ritual",
+    baseCost: 2500000000,
+    costMultiplier: 1.35,
+    basePps: 60000000,
+    unlockAtPps: 50000000,
+    requiresFlag: "dyslexiaUnlocked"
+  },
+  {
+    id: "hellmouth_distribution_node",
+    name: "Hellmouth Distribution Node",
+    description: "A rift in the floor spits out perfectly wrapped packages and sparks.",
+    flavor: "You are advised not to look directly into the loading bay.",
+    type: "ritual",
+    baseCost: 12000000000,
+    costMultiplier: 1.38,
+    basePps: 450000000,
+    unlockAtPps: 250000000,
+    requiresFlag: "dyslexiaUnlocked"
+  },
+  {
+    id: "santa_demon_council",
+    name: "Council of Santas-Demonic",
+    description: "Infinite red suits, infinite contracts, finite worker rights.",
+    flavor: "Their bells ring in perfect, oppressive unison.",
+    type: "ritual",
+    baseCost: 65000000000,
+    costMultiplier: 1.42,
+    basePps: 3000000000,
+    unlockAtPps: 1000000000,
+    requiresFlag: "dyslexiaUnlocked"
   }
 ];
 

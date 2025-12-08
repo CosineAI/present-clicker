@@ -228,21 +228,11 @@
       byType: {},
       byId: {}
     },
-    purchasedUpgrades: new Set(),
-    flags: {
-      dyslexiaUnlocked: false
-    },
-    gates: {
-      open: false,
-      openedAtMs: 0,
-      lastStageIndex: -1,
-      ui: null
-    },
-    shopsVisible: true,
-    devConsole: {
-      element: null,
-      visible: false,
-      presentsInput: null
+    purchasedUpgrades: new Set(),     flags: {       dyslexiaUnlocked: false    },
+    gates: {      open : false,      openedoAtMs: 0,      last StageIndex: -1,      ui : null   l },     // When true, show all producers/upgrades in the UI (even if not yet unlocked).   e // Purchase rules still respect unlock conditions and costs.    shopsVisible: false,
+    devConsole: {      element
+
+ull
     }
   };
 
@@ -483,9 +473,14 @@
       if (!view) return;
 
       var unlocked = isProducerUnlocked(producer);
-      view.card.style.display = unlocked ? "" : "none";
+      var revealAll = state.shopsVisible;
 
-      if (!unlocked) return;
+      // Visibility: in normal mode only show unlocked; in reveal mode show everything.
+      if (!unlocked && !revealAll) {
+        view.card.style.display = "none";
+        return;
+      }
+      view.card.style.display = "";
 
       var cost = getProducerCost(producer);
       var owned = state.producersOwned[producer.id] || 0;
@@ -501,33 +496,31 @@
       view.upgradeCostEl.textContent = "Upgrade: " + formatNumber(upgradeCost) + " 🎁";
 
       var cannotAfford = state.presents < cost;
-      if (cannotAfford) {
+      if (cannotAfford || !unlocked) {
         view.card.classList.add("shop-card--disabled");
         view.card.setAttribute("aria-disabled", "true");
       } else {
         view.card.classList.remove("shop-card--disabled");
         view.card.setAttribute("aria-disabled", "false");
       }
-      view.upgradeButton.disabled = state.presents < upgradeCost;
+      view.upgradeButton.disabled = state.presents < upgradeCost || !unlocked;
     });
+  });
   }
 
   function updateShopsVisibility() {
-    var producersPanel = producersListEl ? producersListEl.parentElement : null;
-    var upgradesPanel = upgradesListEl ? upgradesListEl.parentElement : null;
-    var visible = state.shopsVisible;
-
-    if (producersPanel) {
-      producersPanel.style.display = visible ? "" : "none";
-    }
-    if (upgradesPanel) {
-      upgradesPanel.style.display = visible ? "" : "none";
-    }
+    var revealAll = state.shopsVisible;
 
     if (shopsToggleButton) {
-      shopsToggleButton.textContent = visible ? "Hide shops & upgrades" : "Show shops & upgrades";
-      shopsToggleButton.setAttribute("aria-pressed", visible ? "true" : "false");
+      shopsToggleButton.textContent = revealAll
+        ? "Show only unlocked"
+        : "Reveal all shops & upgrades";
+      shopsToggleButton.setAttribute("aria-pressed", revealAll ? "true" : "false");
     }
+
+    // Reveal mode affects which cards are visible/enabled.
+    updateProducersUI();
+    updateUpgradesUI();
   }
 
   function updateUpgradesUI() {
@@ -535,14 +528,32 @@
       var view = upgradeViews.get(upgrade.id);
       if (!view) return;
 
-      var unlocked = isUpgradeUnlocked(upgrade);
-      view.card.style.display = unlocked ? "" : "none";
+      var revealAll = state.shopsVisible;
+      var purchased = state.purchasedUpgrades.has(upgrade.id);
+      if (purchased) {
+        view.card.style.display = "none";
+        return;
+      }
 
-      if (!unlocked) return;
+      // Whether the player has progressed far enough to buy this upgrade.
+      var meetsUnlock = isUpgradeUnlocked(upgrade);
+
+      if (!meetsUnlock && !revealAll) {
+        view.card.style.display = "none";
+        return;
+      }
+
+      view.card.style.display = "";
 
       view.costEl.textContent = "Cost: " + formatNumber(upgrade.cost) + " 🎁";
-      view.card.disabled = state.presents < upgrade.cost;
+
+      // Only clickable if both unlocked by progress and affordable.
+      var canAfford = state.presents >= upgrade.cost && meetsUnlock;
+      view.card.disabled = !canAfford;
     });
+
+    updateGatesUI();
+  });
 
     updateGatesUI();
   }
