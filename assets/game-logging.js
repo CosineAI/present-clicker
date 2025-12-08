@@ -840,9 +840,6 @@
 
   function addLog(message) {
     recentMessages.unshift(message);
-    if (recentMessages.length > 6) {
-      recentMessages.pop();
-    }
 
     if (!logListEl) return;
 
