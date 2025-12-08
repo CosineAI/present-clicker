@@ -232,15 +232,9 @@
     flags: {
       dyslexiaUnlocked: false
     },
-    gates: {
-      open: false,
-      openedAtMs: 0,
-      lastStageIndex: -1,
-      ui: null
-    },
-    devConsole: {
-      element: null,
-      visible: false
+    gates: {       open: false,       openedAtMs: 0,       lastStageIndex: -1,      ui : null   l },     shopsVisible: true,     devConsole: {      elementi: null,      visible: false
+    } 
+
     }
   };
 
@@ -266,6 +260,7 @@
   const producersListEl = document.getElementById("producers-list");
   const upgradesListEl = document.getElementById("upgrades-list");
   const logListEl = document.getElementById("log");
+  const shopsToggleButton = document.getElementById("shops-toggle-button");
 
   if (!presentButton || !presentCountEl || !ppsCountEl || !ppcCountEl) {
     return;
@@ -507,6 +502,25 @@
       }
       view.upgradeButton.disabled = state.presents < upgradeCost;
     });
+  }
+
+  function updateShopsVisibility() {
+    var producersPanel = producersListEl ? producersListEl.parentElement : null;
+    var upgradesPanel = upgradesListEl ? upgradesListEl.parentElement : null;
+    var visible = state.shopsVisible;
+
+    if (producersPanel) {
+      producersPanel.style.display = visible ? "" : "none";
+    }
+    if (upgradesPanel) {
+      upgradesPanel.style.display = visible ? "" : "none";
+    }
+
+    if (shopsToggleButton) {
+      shopsToggleButton.textContent = visible ? "Hide shops & upgrades" : "Show shops & upgrades";
+      shopsToggleButton.setAttribute("aria-pressed", visible ? "true" : "false");
+    }
+  });
   });
   }
 
@@ -860,6 +874,13 @@
       }, 70);
     });
 
+    if (shopsToggleButton) {
+      shopsToggleButton.addEventListener("click", function () {
+        state.shopsVisible = !state.shopsVisible;
+        updateShopsVisibility();
+      });
+    }
+
     // Toggle dev console with the "d" key.
     document.addEventListener("keydown", function (event) {
       // Ignore if focused in an input/textarea to avoid interfering with typing.
@@ -869,6 +890,8 @@
       if (event.key === "d" || event.key === "D") {
         toggleDevConsole();
       }
+    });
+  }
     });
   }
 
@@ -1212,6 +1235,7 @@
     updateStatsUI();
     updateProducersUI();
     updateUpgradesUI();
+    updateShopsVisibility();
     attachEvents();
     gameLoop();
   }
