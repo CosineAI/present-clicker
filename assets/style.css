@@ -121,6 +121,51 @@ header .tagline {
   opacity: 0.85;
 }
 
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.settings-button {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.7);
+  background: rgba(15, 23, 42, 0.96);
+  color: #fefce8;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.8);
+}
+
+.settings-button:hover {
+  background: rgba(30, 64, 175, 0.95);
+}
+
+@media (max-width: 600px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-title {
+    align-items: center;
+    text-align: center;
+  }
+}
+
 main {
   flex: 1 0 auto;
   max-width: 750px;
@@ -141,10 +186,11 @@ main {
 /* Game layout */
 
 main.game-shell {
-  max-width: 1120px;
-  margin-top: 2.6rem;
+  max-width: none;
+  width: 100%;
+  margin: 2.6rem 1rem 0 1rem;
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(260px, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 2fr);
   column-gap: 1.75rem;
   row-gap: 1.6rem;
   align-items: stretch;
@@ -304,6 +350,100 @@ main.game-shell {
 
 .shops-toggle-button:hover {
   background: rgba(30, 64, 175, 0.95);
+}
+
+.settings-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.settings-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+}
+
+.settings-modal-dialog {
+  position: relative;
+  z-index: 1;
+  background: #fefce8;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.85);
+  max-width: 420px;
+  width: calc(100% - 3rem);
+  padding: 1rem 1.25rem 1.1rem;
+}
+
+.settings-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.settings-modal-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.settings-close-button {
+  border: none;
+  background: transparent;
+  color: #0b1120;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.1rem 0.25rem;
+}
+
+.settings-modal-body {
+  font-size: 0.9rem;
+}
+
+.settings-intro {
+  margin: 0 0 0.8rem;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.settings-row-label {
+  flex: 1 1 auto;
+}
+
+.settings-row-title {
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.settings-row-help {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+  .settings-modal-dialog {
+    width: calc(100% - 2rem);
+  }
+
+  .settings-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-modal-body .shops-toggle-button {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .shop-panel {

@@ -45,6 +45,11 @@
   var producersListEl = document.getElementById("producers-list");
   var upgradesListEl = document.getElementById("upgrades-list");
   var shopsToggleButton = document.getElementById("shops-toggle-button");
+  var settingsButton = document.getElementById("settings-button");
+  var settingsModal = document.getElementById("settings-modal");
+  var settingsCloseButton = settingsModal
+    ? settingsModal.querySelector(".settings-close-button")
+    : null;
 
   if (!presentButton || !presentCountEl || !ppsCountEl || !ppcCountEl) {
     return;
@@ -462,6 +467,18 @@
     updateUpgradesUI();
   }
 
+  function openSettingsModal() {
+    if (!settingsModal || !settingsButton) return;
+    settingsModal.removeAttribute("hidden");
+    settingsButton.setAttribute("aria-expanded", "true");
+  }
+
+  function closeSettingsModal() {
+    if (!settingsModal || !settingsButton) return;
+    settingsModal.setAttribute("hidden", "");
+    settingsButton.setAttribute("aria-expanded", "false");
+  }
+
   function attachEvents() {
     presentButton.addEventListener("click", function () {
       presentButton.classList.add("present-button--clicked");
@@ -475,6 +492,37 @@
       shopsToggleButton.addEventListener("click", function () {
         state.shopsVisible = !state.shopsVisible;
         updateShopsVisibility();
+      });
+    }
+
+    if (settingsButton && settingsModal) {
+      settingsButton.addEventListener("click", function () {
+        var isOpen = !settingsModal.hasAttribute("hidden");
+        if (isOpen) {
+          closeSettingsModal();
+        } else {
+          openSettingsModal();
+        }
+      });
+
+      if (settingsCloseButton) {
+        settingsCloseButton.addEventListener("click", function () {
+          closeSettingsModal();
+        });
+      }
+
+      settingsModal.addEventListener("click", function (event) {
+        if (event.target === settingsModal) {
+          closeSettingsModal();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" || event.key === "Esc") {
+          if (!settingsModal.hasAttribute("hidden")) {
+            closeSettingsModal();
+          }
+        }
       });
     }
 
