@@ -108,6 +108,54 @@
       unlock: { totalPresents: 150 }
     },
     {
+      id: "industrial_gloves",
+      name: "Industrial Strength Gloves",
+      description: "Your fingers are basically tiny forklifts now. +3 per click.",
+      cost: 2500,
+      effect: { type: "ppcAdd", value: 3 },
+      unlock: { totalPresents: 1500 }
+    },
+    {
+      id: "elf_adrenaline",
+      name: "Elf Adrenaline Shots",
+      description: "You stop blinking for a bit. Click output x3.",
+      cost: 15000,
+      effect: { type: "ppcMultiplier", value: 3 },
+      unlock: { totalPresents: 10000 }
+    },
+    {
+      id: "phantom_clicks",
+      name: "Phantom Clicks",
+      description: "You swear you're still clicking even when you’re not. +10 per click.",
+      cost: 90000,
+      effect: { type: "ppcAdd", value: 10 },
+      unlock: { totalPresents: 60000 }
+    },
+    {
+      id: "quantum_pointer",
+      name: "Quantum Pointer Device",
+      description: "Each click happens in several timelines. Click output x4.",
+      cost: 750000,
+      effect: { type: "ppcMultiplier", value: 4 },
+      unlock: { totalPresents: 400000 }
+    },
+    {
+      id: "saint_nick_knuckles",
+      name: "Saint Nick’s Knuckles",
+      description: "Your hand is now a festive blunt instrument. +50 per click.",
+      cost: 3500000,
+      effect: { type: "ppcAdd", value: 50 },
+      unlock: { totalPresents: 2000000 }
+    },
+    {
+      id: "chromatic_reindeer_energy",
+      name: "Chromatic Reindeer Energy Drink",
+      description: "Illegally caffeinated. Click output x5.",
+      cost: 25000000,
+      effect: { type: "ppcMultiplier", value: 5 },
+      unlock: { totalPresents: 15000000 }
+    },
+    {
       id: "assistant_whip",
       name: "Ergonomic Whips",
       description: "Assistants work twice as fast.",
