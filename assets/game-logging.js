@@ -830,7 +830,7 @@
   var moraleAccumulator = 0;
   var lastStoryStageIndex = -1;
 
-  var logListEl = document.getElementBy
+  var logListEl = document.getElementById("log");
 
   function randomFrom(array) {
     if (!array || !array.length) return null;
