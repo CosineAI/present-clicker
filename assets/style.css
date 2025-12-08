@@ -60,6 +60,17 @@ body.gates-open .log-panel {
   box-shadow: 0 12px 30px rgba(248, 113, 113, 0.85);
 }
 
+body.gates-open .story-panel {
+  background: radial-gradient(circle at top left, #111827, #020617);
+  border-color: rgba(248, 113, 113, 0.6);
+  color: #fefce8;
+}
+
+body.gates-open .story-panel h2,
+body.gates-open .story-panel p {
+  color: #fefce8;
+}
+
 /* Fire + emoji overlay when gates are open */
 
 body.gates-open::after {
@@ -136,7 +147,7 @@ main.game-shell {
   grid-template-columns: minmax(0, 1.45fr) minmax(260px, 1fr);
   column-gap: 1.75rem;
   row-gap: 1.6rem;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .game-left,
@@ -244,7 +255,9 @@ main.game-shell {
   background: rgba(15, 23, 42, 0.92);
   color: #fefce8;
   box-shadow: 0 10px 25px rgba(15,23,42,0.9);
-  max-height: 180px;
+  flex: 1 1 auto;
+  min-height: 180px;
+  max-height: none;
   overflow-y: auto;
 }
 
