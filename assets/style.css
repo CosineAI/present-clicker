@@ -60,6 +60,17 @@ body.gates-open .log-panel {
   box-shadow: 0 12px 30px rgba(248, 113, 113, 0.85);
 }
 
+body.gates-open .story-panel {
+  background: radial-gradient(circle at top left, #111827, #020617);
+  border-color: rgba(248, 113, 113, 0.6);
+  color: #fefce8;
+}
+
+body.gates-open .story-panel h2,
+body.gates-open .story-panel p {
+  color: #fefce8;
+}
+
 /* Fire + emoji overlay when gates are open */
 
 body.gates-open::after {
