@@ -512,15 +512,9 @@
     });
   }
 
-  function updateShopsVisibility() {
-    var producersPanel = producersListEl ? producersListEl.parentElement : null;
-    var upgradesPanel = upgradesListEl ? upgradesListEl.parentElement : null;
-    var visible = state.shopsVisible;
-
-    if (producersPanel) {
-      producersPanel.style.display = visible ? "" : "none";
-    }
-    if (upgradesPanel) {
+  function updateShopsVisibility() {     var producersPanel = producersListEl ? producersListEl.parentElement : null;    var  upgradesPanel = upgradesListEl ? upgradesListEl.parentElement : null;    var  visible = state.shopsVisible;
+    if (producersPanel) {     ) producersPanel.style.display = visible ? "" : "none";   n }    if  (upgradesPanel) {
+sPanel) {
       upgradesPanel.style.display = visible ? "" : "none";
     }
 
