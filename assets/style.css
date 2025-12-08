@@ -188,15 +188,18 @@ main {
 main.game-shell {
   max-width: none;
   width: auto;
-  margin: 2.6rem 1rem 0 1rem;
+  margin: 1rem 1rem 0 1rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 2fr);
+  grid-template-rows: minmax(0, 1fr);
   column-gap: 1.75rem;
   row-gap: 1.6rem;
   align-items: stretch;
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow:}
 
 .game-left,
 .game-right {
@@ -204,6 +207,7 @@ main.game-shell {
   flex-direction: column;
   gap: 1.1rem;
   align-items: stretch;
+  min-height: 0;
 }
 
 .story-panel {
