@@ -477,6 +477,26 @@ main.game-shell {
   gap: 0.4rem;
 }
 
+/* Upgrades grouping */
+
+.upgrades-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.upgrades-section-title {
+  margin: 0.6rem 0 0.2rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.shop-card--purchased {
+  opacity: 0.6;
+}
+
 /* Shop card buttons */
 
 .shop-card {

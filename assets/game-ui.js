@@ -44,6 +44,10 @@
   var presentButton = document.getElementById("present-button");
   var producersListEl = document.getElementById("producers-list");
   var upgradesListEl = document.getElementById("upgrades-list");
+
+  var upgradesAvailableSection = null;
+  var upgradesPurchasedSection = null;
+  var upgradesPurchasedTitleEl = null;
   var shopsToggleButton = document.getElementById("shops-toggle-button");
   var settingsButton = document.getElementById("settings-button");
   var settingsModal = document.getElementById("settings-modal");
@@ -152,15 +156,12 @@
 
       var revealAll = state.shopsVisible;
       var purchased = state.purchasedUpgrades.has(upgrade.id);
-      if (purchased) {
-        view.card.style.display = "none";
-        return;
-      }
 
       // Whether the player has progressed far enough to buy this upgrade.
       var meetsUnlock = isUpgradeUnlocked(upgrade);
 
-      if (!meetsUnlock && !revealAll) {
+      // Hide only if not purchased, not unlocked, and not in reveal-all mode.
+      if (!purchased && !meetsUnlock && !revealAll) {
         view.card.style.display = "none";
         return;
       }
@@ -169,10 +170,30 @@
 
       view.costEl.textContent = "Cost: " + formatNumber(upgrade.cost) + " 🎁";
 
-      // Only clickable if both unlocked by progress and affordable.
-      var canAfford = state.presents >= upgrade.cost && meetsUnlock;
-      view.card.disabled = !canAfford;
+      if (purchased) {
+        // Keep purchased upgrades visible but disabled, and move them under "Purchased".
+        view.card.disabled = true;
+        view.card.classList.add("shop-card--purchased");
+        if (upgradesPurchasedSection && view.card.parentNode !== upgradesPurchasedSection) {
+          upgradesPurchasedSection.appendChild(view.card);
+        }
+      } else {
+        // Available upgrades live in the available section and remain clickable if affordable.
+        view.card.classList.remove("shop-card--purchased");
+        if (upgradesAvailableSection && view.card.parentNode !== upgradesAvailableSection) {
+          upgradesAvailableSection.appendChild(view.card);
+        }
+
+        var canAfford = state.presents >= upgrade.cost && meetsUnlock;
+        view.card.disabled = !canAfford;
+      }
     });
+
+    // Show or hide the "Purchased" header based on whether anything is in that section.
+    if (upgradesPurchasedTitleEl && upgradesPurchasedSection) {
+      var hasPurchasedChildren = upgradesPurchasedSection.children.length > 0;
+      upgradesPurchasedTitleEl.style.display = hasPurchasedChildren ? "" : "none";
+    }
 
     updateGatesUI();
   }
@@ -340,6 +361,22 @@
   function initUpgradesUI() {
     if (!upgradesListEl) return;
 
+    // Create sections for available and purchased upgrades.
+    upgradesAvailableSection = document.createElement("div");
+    upgradesAvailableSection.className = "upgrades-section upgrades-section--available";
+
+    upgradesPurchasedTitleEl = document.createElement("div");
+    upgradesPurchasedTitleEl.className = "upgrades-section-title";
+    upgradesPurchasedTitleEl.textContent = "Purchased";
+    upgradesPurchasedTitleEl.style.display = "none";
+
+    upgradesPurchasedSection = document.createElement("div");
+    upgradesPurchasedSection.className = "upgrades-section upgrades-section--purchased";
+
+    upgradesListEl.appendChild(upgradesAvailableSection);
+    upgradesListEl.appendChild(upgradesPurchasedTitleEl);
+    upgradesListEl.appendChild(upgradesPurchasedSection);
+
     // Normal upgrades
     UPGRADES.forEach(function (upgrade) {
       var card = document.createElement("button");
@@ -383,7 +420,7 @@
         buyUpgrade(upgrade.id);
       });
 
-      upgradesListEl.appendChild(card);
+      upgradesAvailableSection.appendChild(card);
 
       upgradeViews.set(upgrade.id, {
         card: card,
