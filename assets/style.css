@@ -207,7 +207,7 @@ main.game-shell {
   border-radius: 16px;
   padding: 1.1rem 1.2rem 1.1rem;
   border: 1px solid rgba(190, 24, 93, 0.25);
-  flex: 1 1 auto;
+  flex: 1.2 1 auto; /* let story claim a bit more vertical space */
   min-height: 0;
   overflow-y: auto;
 }
@@ -226,7 +226,7 @@ main.game-shell {
 .stats-panel {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.6rem; /* slightly tighter stack */
   margin-top: auto;
 }
 
@@ -234,8 +234,8 @@ main.game-shell {
   flex: 1 1 0;
   background: linear-gradient(135deg, #14532d, #166534); /* Christmas green */
   color: #fefce8;
-  padding: 0.8rem 0.9rem;
-  border-radius: 14px;
+  padding: 0.6rem 0.75rem; /* a bit more compact */
+  border-radius: 12px;
   border: 1px solid rgba(248, 250, 252, 0.35);
   display: flex;
   flex-direction: column;
@@ -243,14 +243,14 @@ main.game-shell {
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.7;
 }
 
 .stat-value {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   margin-top: 0.25rem;
 }
@@ -296,14 +296,14 @@ main.game-shell {
 /* Log */
 
 .log-panel {
-  margin-top: 1.1rem;
-  padding: 0.85rem 1rem 0.9rem;
-  border-radius: 14px;
+  margin-top: 0.9rem;
+  padding: 0.7rem 0.9rem 0.75rem;
+  border-radius: 12px;
   background: rgba(15, 23, 42, 0.92);
   color: #fefce8;
   flex: 0 0 auto;
-  min-height: 180px;
-  max-height: 220px;
+  min-height: 150px;
+  max-height: 190px;
   overflow-y: auto;
 }
 
