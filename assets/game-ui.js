@@ -571,7 +571,7 @@
       ui.nameEl.textContent = "OPEN THE GATES";
       ui.descEl.textContent = "Summon help from elsewhere. Rituals surge, then slowly slip away.";
       ui.costEl.textContent = "Cost: " + formatNumber(cost) + " 🎁";
-      ui.statusEl.textContent = "Effect: rituals start at x10 and decay to x0.5 over ~10 minutes.";
+      ui.statusEl.textContent = "Effect: Productivity has increased, but at what cost?";
       ui.card.disabled = state.presents < cost || cost === 0;
     }
   }
