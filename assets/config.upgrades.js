@@ -187,6 +187,62 @@ window.PRESENT_CLICKER_UPGRADES = [
     unlock: { totalPresents: 50000 }
   },
   {
+    id: "click_fingerprint_removal",
+    name: "Click Fingerprint Removal Service",
+    description: "No paper trail, no pointer trail. Presents per click +25.",
+    cost: 750000,
+    effect: { type: "ppcAdd", value: 25 },
+    unlock: { totalPresents: 300000 }
+  },
+  {
+    id: "shift_splitter",
+    name: "Shift Splitter Algorithm",
+    description: "You and your schedule are both in two places at once. Global output x1.5.",
+    cost: 2500000,
+    effect: { type: "globalMultiplier", value: 1.5 },
+    unlock: { totalPresents: 1500000 }
+  },
+  {
+    id: "ghost_shift",
+    name: "Unscheduled Ghost Shift",
+    description: "A mysterious third shift clocks in under 'Other'. Factory output x1.75.",
+    cost: 8000000,
+    effect: { type: "typeMultiplier", targetType: "factory", value: 1.75 },
+    unlock: { totalPresents: 4000000 }
+  },
+  {
+    id: "compliance_wreaths",
+    name: "Compliance Wreaths",
+    description: "Festive signage reminds everyone rules are for elves, not quotas. Ritual output x1.5.",
+    cost: 35000000,
+    effect: { type: "typeMultiplier", targetType: "ritual", value: 1.5 },
+    unlock: { pps: 250000 }
+  },
+  {
+    id: "holiday_spin",
+    name: "Holiday Spin Department",
+    description: "Rebrands 'crunch' as 'tradition'. Global output x1.5.",
+    cost: 150000000,
+    effect: { type: "globalMultiplier", value: 1.5 },
+    unlock: { pps: 1500000 }
+  },
+  {
+    id: "inventory_singularity",
+    name: "Inventory Singularity Closet",
+    description: "One closet, all stock. Factories and warehouses output x1.5.",
+    cost: 600000000,
+    effect: { type: "typeMultiplier", targetType: "factory", value: 1.5 },
+    unlock: { pps: 8000000 }
+  },
+  {
+    id: "elf_therapy_pamphlet",
+    name: "Elf Therapy Pamphlet (Unread)",
+    description: "Acknowledging burnout counts as a productivity initiative. Assistants x1.5.",
+    cost: 900000000,
+    effect: { type: "typeMultiplier", targetType: "assistant", value: 1.5 },
+    unlock: { pps: 12000000 }
+  },
+  {
     id: "dyslexia",
     name: "Dyslexia: ???",
     description: "You misread \"Santa\" as \"Satan\" and keep reading.",

@@ -44,10 +44,6 @@
   var presentButton = document.getElementById("present-button");
   var producersListEl = document.getElementById("producers-list");
   var upgradesListEl = document.getElementById("upgrades-list");
-
-  var upgradesAvailableSection = null;
-  var upgradesPurchasedSection = null;
-  var upgradesPurchasedTitleEl = null;
   var shopsToggleButton = document.getElementById("shops-toggle-button");
   var settingsButton = document.getElementById("settings-button");
   var settingsModal = document.getElementById("settings-modal");
@@ -171,29 +167,23 @@
       view.costEl.textContent = "Cost: " + formatNumber(upgrade.cost) + " 🎁";
 
       if (purchased) {
-        // Keep purchased upgrades visible but disabled, and move them under "Purchased".
+        // Keep purchased upgrades visible in place with a checkmark and greyed-out style.
         view.card.disabled = true;
         view.card.classList.add("shop-card--purchased");
-        if (upgradesPurchasedSection && view.card.parentNode !== upgradesPurchasedSection) {
-          upgradesPurchasedSection.appendChild(view.card);
+        if (view.purchasedEl) {
+          view.purchasedEl.style.display = "";
         }
       } else {
-        // Available upgrades live in the available section and remain clickable if affordable.
+        // Available upgrades remain clickable if affordable.
         view.card.classList.remove("shop-card--purchased");
-        if (upgradesAvailableSection && view.card.parentNode !== upgradesAvailableSection) {
-          upgradesAvailableSection.appendChild(view.card);
+        if (view.purchasedEl) {
+          view.purchasedEl.style.display = "none";
         }
 
         var canAfford = state.presents >= upgrade.cost && meetsUnlock;
         view.card.disabled = !canAfford;
       }
     });
-
-    // Show or hide the "Purchased" header based on whether anything is in that section.
-    if (upgradesPurchasedTitleEl && upgradesPurchasedSection) {
-      var hasPurchasedChildren = upgradesPurchasedSection.children.length > 0;
-      upgradesPurchasedTitleEl.style.display = hasPurchasedChildren ? "" : "none";
-    }
 
     updateGatesUI();
   }
@@ -361,22 +351,6 @@
   function initUpgradesUI() {
     if (!upgradesListEl) return;
 
-    // Create sections for available and purchased upgrades.
-    upgradesAvailableSection = document.createElement("div");
-    upgradesAvailableSection.className = "upgrades-section upgrades-section--available";
-
-    upgradesPurchasedTitleEl = document.createElement("div");
-    upgradesPurchasedTitleEl.className = "upgrades-section-title";
-    upgradesPurchasedTitleEl.textContent = "Purchased";
-    upgradesPurchasedTitleEl.style.display = "none";
-
-    upgradesPurchasedSection = document.createElement("div");
-    upgradesPurchasedSection.className = "upgrades-section upgrades-section--purchased";
-
-    upgradesListEl.appendChild(upgradesAvailableSection);
-    upgradesListEl.appendChild(upgradesPurchasedTitleEl);
-    upgradesListEl.appendChild(upgradesPurchasedSection);
-
     // Normal upgrades
     UPGRADES.forEach(function (upgrade) {
       var card = document.createElement("button");
@@ -410,7 +384,13 @@
       var costEl = document.createElement("span");
       costEl.className = "shop-card-cost";
 
+      var purchasedEl = document.createElement("span");
+      purchasedEl.className = "shop-card-purchased-mark";
+      purchasedEl.textContent = "✓ purchased";
+      purchasedEl.style.display = "none";
+
       meta.appendChild(costEl);
+      meta.appendChild(purchasedEl);
       bottom.appendChild(meta);
 
       card.appendChild(top);
@@ -420,11 +400,12 @@
         buyUpgrade(upgrade.id);
       });
 
-      upgradesAvailableSection.appendChild(card);
+      upgradesListEl.appendChild(card);
 
       upgradeViews.set(upgrade.id, {
         card: card,
-        costEl: costEl
+        costEl: costEl,
+        purchasedEl: purchasedEl
       });
     });
 
