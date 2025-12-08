@@ -244,7 +244,7 @@ main.game-shell {
   background: rgba(15, 23, 42, 0.92);
   color: #fefce8;
   box-shadow: 0 10px 25px rgba(15,23,42,0.9);
-  max-height: 180px;
+  max-height: 260px;
   overflow-y: auto;
 }
 
