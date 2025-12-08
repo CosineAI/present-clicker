@@ -232,9 +232,17 @@
     flags: {
       dyslexiaUnlocked: false
     },
-    gates: {       open: false,       openedAtMs: 0,       lastStageIndex: -1,      ui : null   l },     shopsVisible: true,     devConsole: {      elementi: null,      visible: false
-    } 
-
+    gates: {
+      open: false,
+      openedAtMs: 0,
+      lastStageIndex: -1,
+      ui: null
+    },
+    shopsVisible: true,
+    devConsole: {
+      element: null,
+      visible: false,
+      presentsInput: null
     }
   };
 
