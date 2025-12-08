@@ -238,7 +238,7 @@ main.game-shell {
   border: 1px solid rgba(248, 250, 252, 0.35);
   background: rgba(15, 23, 42, 0.96);
   padding: 0.65rem 0.7rem 0.7rem;
-  cursor: pointer;
+  cursor: default;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -246,9 +246,10 @@ main.game-shell {
   transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, border-color 0.08s ease-out, background 0.08s ease-out;
   color: inherit;
   font: inherit;
+  box-sizing: border-box;
 }
 
-.shop-card:hover:not(:disabled) {
+.shop-card:hover {
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(15,23,42,0.95);
   border-color: rgba(254, 249, 195, 0.95);
@@ -294,13 +295,18 @@ main.game-shell {
 .shop-card-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.4rem;
   font-size: 0.78rem;
   align-items: center;
 }
 
 .shop-card-cost {
   font-weight: 600;
+  max-width: 48%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .shop-card-pps {
@@ -310,6 +316,10 @@ main.game-shell {
 .shop-card-level {
   font-weight: 600;
   color: #fbbf24;
+  max-width: 30%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .shop-card-upgrade-button {
@@ -324,6 +334,10 @@ main.game-shell {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
+  max-width: 52%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .shop-card-upgrade-button:disabled {
