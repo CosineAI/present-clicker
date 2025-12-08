@@ -101,6 +101,7 @@ main.game-shell {
 
 .stats-panel {
   display: flex;
+  flex-direction: column;
   gap: 0.9rem;
   margin-top: 0.2rem;
 }

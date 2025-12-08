@@ -238,20 +238,25 @@
 
   function formatNumber(value) {
     if (!isFinite(value)) return "∞";
-    if (value < 1000) return value.toFixed(0);
 
+    // Show full integers (with grouping) up to 1 quadrillion.
+    if (Math.abs(value) &lt; 1e15) {
+      return Math.floor(value).toLocaleString("en-US");
+    }
+
+    // For truly enormous numbers, fall back to compact notation.
     var units = ["K", "M", "B", "T", "Qa", "Qi"];
     var unitIndex = -1;
     var v = value;
 
-    while (v >= 1000 && unitIndex < units.length - 1) {
+    while (v &gt;= 1000 &amp;&amp; unitIndex &lt; units.length - 1) {
       v /= 1000;
       unitIndex += 1;
     }
 
     var decimals;
-    if (v < 10) decimals = 2;
-    else if (v < 100) decimals = 1;
+    if (v &lt; 10) decimals = 2;
+    else if (v &lt; 100) decimals = 1;
     else decimals = 0;
 
     return v.toFixed(decimals) + units[unitIndex];
