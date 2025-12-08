@@ -228,11 +228,23 @@
       byType: {},
       byId: {}
     },
-    purchasedUpgrades: new Set(),     flags: {       dyslexiaUnlocked: false    },
-    gates: {      open : false,      openedoAtMs: 0,      last StageIndex: -1,      ui : null   l },     // When true, show all producers/upgrades in the UI (even if not yet unlocked).   e // Purchase rules still respect unlock conditions and costs.    shopsVisible: false,
-    devConsole: {      element
-
-ull
+    purchasedUpgrades: new Set(),
+    flags: {
+      dyslexiaUnlocked: false
+    },
+    gates: {
+      open: false,
+      openedAtMs: 0,
+      lastStageIndex: -1,
+      ui: null
+    },
+    // When true, show all producers/upgrades in the UI (even if not yet unlocked).
+    // Purchase rules still respect unlock conditions and costs.
+    shopsVisible: false,
+    devConsole: {
+      element: null,
+      visible: false,
+      presentsInput: null
     }
   };
 
@@ -505,7 +517,6 @@ ull
       }
       view.upgradeButton.disabled = state.presents < upgradeCost || !unlocked;
     });
-  });
   }
 
   function updateShopsVisibility() {
@@ -551,9 +562,6 @@ ull
       var canAfford = state.presents >= upgrade.cost && meetsUnlock;
       view.card.disabled = !canAfford;
     });
-
-    updateGatesUI();
-  });
 
     updateGatesUI();
   }
