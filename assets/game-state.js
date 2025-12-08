@@ -85,9 +85,11 @@
     if (elapsedSeconds < 0) elapsedSeconds = 0;
 
     // Exponential decay from ~6.66x down towards 0, clamped at 0.5x.
-    // 6.66 * exp(-k * t) = 0.5 at t = 600s => k = ln(6.66 / 0.5) / 600
+    // 6.66 * exp(-k * t) = 0.5 at t = 399.6s (~6.66 minutes)
+    // => k = ln(6.66 / 0.5) / 399.6
     var initialBoost = 6.66;
-    var k = Math.log(initialBoost / 0.5) / 600;
+    var targetSeconds = 6.66 * 60;
+    var k = Math.log(initialBoost / 0.5) / targetSeconds;
     var boost = initialBoost * Math.exp(-k * elapsedSeconds);
     if (boost < 0.5) boost = 0.5;
     return boost;
