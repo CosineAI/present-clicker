@@ -96,7 +96,7 @@ body.gates-open::after {
 header {
   background: #b91c1c; /* deep Christmas red */
   color: #fef9c3;
-  padding: 1.2rem 0 1.2rem;
+  padding: 1rem 0; /* 16px top and bottom */
   text-align: center;
   letter-spacing: 0.04em;
   position: relative;
