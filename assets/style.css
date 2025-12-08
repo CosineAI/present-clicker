@@ -296,6 +296,7 @@ main.game-shell {
   flex-wrap: wrap;
   gap: 0.6rem;
   font-size: 0.78rem;
+  align-items: center;
 }
 
 .shop-card-cost {
@@ -304,6 +305,30 @@ main.game-shell {
 
 .shop-card-pps {
   opacity: 0.9;
+}
+
+.shop-card-level {
+  font-weight: 600;
+  color: #fbbf24;
+}
+
+.shop-card-upgrade-button {
+  margin-left: auto;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.6);
+  background: rgba(15, 23, 42, 0.95);
+  color: #fefce8;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.shop-card-upgrade-button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .shop-card-flavor {

@@ -195,6 +195,8 @@
     presentsPerClick: 1,
     presentsPerSecond: 0,
     producersOwned: {},
+    // Per-producer upgrade levels (1 = base). Upgrades can go as high as you can afford.
+    producerLevels: {},
     multipliers: {
       global: 1,
       byType: {},
@@ -213,6 +215,7 @@
       state.multipliers.byType[p.type] = 1;
     }
     state.producersOwned[p.id] = 0;
+    state.producerLevels[p.id] = 1;
   });
 
   const upgradeById = {};
@@ -284,6 +287,18 @@
     return Math.ceil(cost);
   }
 
+  function getProducerLevel(producerId) {
+    return state.producerLevels[producerId] || 1;
+  }
+
+  // Upgrade cost scales with producer base cost and current level.
+  // Current formula: baseCost * 5 * level^2
+  function getProducerUpgradeCost(producer) {
+    var level = getProducerLevel(producer.id);
+    var cost = producer.baseCost * 5 * Math.pow(level, 2);
+    return Math.ceil(cost);
+  }
+
   function getMultiplierForProducer(producer) {
     var byType = state.multipliers.byType[producer.type] || 1;
     var byId = state.multipliers.byId[producer.id] || 1;
@@ -297,7 +312,8 @@
       var owned = state.producersOwned[producer.id] || 0;
       if (!owned) return;
 
-      var unitPps = producer.basePps * getMultiplierForProducer(producer);
+      var level = getProducerLevel(producer.id);
+      var unitPps = producer.basePps * level * getMultiplierForProducer(producer);
       total += unitPps * owned;
     });
 
@@ -356,13 +372,19 @@
 
       var cost = getProducerCost(producer);
       var owned = state.producersOwned[producer.id] || 0;
-      var unitPps = producer.basePps * getMultiplierForProducer(producer);
+      var level = getProducerLevel(producer.id);
+      var unitPps = producer.basePps * level * getMultiplierForProducer(producer);
+      var upgradeCost = getProducerUpgradeCost(producer);
 
       view.costEl.textContent = "Cost: " + formatNumber(cost) + " 🎁";
       view.countEl.textContent = "Owned: " + owned;
       view.ppsEl.textContent = "+" + formatNumber(unitPps) + "/sec each";
 
+      view.levelEl.textContent = "Lvl " + level;
+      view.upgradeCostEl.textContent = "Upgrade: " + formatNumber(upgradeCost) + " 🎁";
+
       view.card.disabled = state.presents < cost;
+      view.upgradeButton.disabled = state.presents < upgradeCost;
     });
   }
 
@@ -440,6 +462,23 @@
     updateUpgradesUI();
   }
 
+  function upgradeProducer(id) {
+    var producer = producerById[id];
+    if (!producer) return;
+    if (!isProducerUnlocked(producer)) return;
+
+    var upgradeCost = getProducerUpgradeCost(producer);
+    if (state.presents < upgradeCost) return;
+
+    spendPresents(upgradeCost);
+    state.producerLevels[id] = (state.producerLevels[id] || 1) + 1;
+
+    recalcPps();
+    updateStatsUI();
+    updateProducersUI();
+    updateUpgradesUI();
+  }
+
   function buyUpgrade(id) {
     if (state.purchasedUpgrades.has(id)) return;
 
@@ -463,8 +502,7 @@
     if (!producersListEl) return;
 
     PRODUCERS.forEach(function (producer) {
-      var card = document.createElement("button");
-      card.type = "button";
+      var card = document.createElement("div");
       card.className = "shop-card";
       card.style.display = "none";
 
@@ -501,14 +539,33 @@
       var meta = document.createElement("div");
       meta.className = "shop-card-meta";
 
-      var costEl = document.createElement("span");
+      var costEl = document.createElement("button");
+      costEl.type = "button";
       costEl.className = "shop-card-cost";
+      costEl.addEventListener("click", function () {
+        buyProducer(producer.id);
+      });
 
       var ppsEl = document.createElement("span");
       ppsEl.className = "shop-card-pps";
 
+      var levelEl = document.createElement("span");
+      levelEl.className = "shop-card-level";
+
+      var upgradeButton = document.createElement("button");
+      upgradeButton.type = "button";
+      upgradeButton.className = "shop-card-upgrade-button";
+      var upgradeCostEl = document.createElement("span");
+      upgradeCostEl.className = "shop-card-upgrade-cost";
+      upgradeButton.appendChild(upgradeCostEl);
+      upgradeButton.addEventListener("click", function () {
+        upgradeProducer(producer.id);
+      });
+
       meta.appendChild(costEl);
       meta.appendChild(ppsEl);
+      meta.appendChild(levelEl);
+      meta.appendChild(upgradeButton);
 
       var flavorEl = document.createElement("div");
       flavorEl.className = "shop-card-flavor";
@@ -520,17 +577,16 @@
       card.appendChild(top);
       card.appendChild(bottom);
 
-      card.addEventListener("click", function () {
-        buyProducer(producer.id);
-      });
-
       producersListEl.appendChild(card);
 
       producerViews.set(producer.id, {
         card: card,
         costEl: costEl,
         countEl: countEl,
-        ppsEl: ppsEl
+        ppsEl: ppsEl,
+        levelEl: levelEl,
+        upgradeButton: upgradeButton,
+        upgradeCostEl: upgradeCostEl
       });
     });
   }
