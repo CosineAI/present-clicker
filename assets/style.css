@@ -189,9 +189,8 @@ main {
 main.game-shell {
   max-width: none;
   width: auto;
-  margin: 0 1rem 0 1rem;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 2fr);
+  margin: 1rem; /* 16px margin on all sides */
+ -template-columns: minmax(0, 1fr) minmax(260px, 2fr);
   grid-template-rows: minmax(0, 1fr);
   column-gap: 1.75rem;
   row-gap: 1.6rem;
@@ -474,6 +473,7 @@ main.game-shell {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  box-sizing: border-box; /* ensure padding stays inside the height from game-right */
   overflow-y: auto;
 }
 
@@ -492,9 +492,6 @@ main.game-shell {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  flex: 1 1 auto;
- ;
-  overflow-y: auto;
 }
 
 /* Shop card buttons */
@@ -755,19 +752,14 @@ footer {
 
 @media (min-width: 980px) {
   .game-right {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 0.9rem;
-    row-gap: 0.9rem;
-    align-items: stretch;
-  }
-
-  .shop-toggle {
-    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    gap: 0.9rem;
   }
 
   .game-right .shop-panel {
-    height: 100%;
+    flex: 1 1 0;
+    min-height: 0;
   }
 }
 
