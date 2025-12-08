@@ -497,8 +497,15 @@
       view.levelEl.textContent = "Lvl " + level;
       view.upgradeCostEl.textContent = "Upgrade: " + formatNumber(upgradeCost) + " 🎁";
 
-      view.card.disabled = state.presents < cost;
-      view.upgradeButton.disabled = state.presents < upgradeCost;
+      var cannotAfford = state.presents &lt; cost;
+      if (cannotAfford) {
+        view.card.classList.add("shop-card--disabled");
+        view.card.setAttribute("aria-disabled", "true");
+      } else {
+        view.card.classList.remove("shop-card--disabled");
+        view.card.setAttribute("aria-disabled", "false");
+      }
+      view.upgradeButton.disabled = state.presents &lt; upgradeCost;
     });
   }
 
