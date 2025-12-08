@@ -26,6 +26,7 @@
   var logShopUpgrade = logModule.logShopUpgrade || function () {};
   var maybeLogMorale = logModule.maybeLogMorale || function () {};
   var updateGatesStatus = logModule.updateGatesStatus || function () {};
+  var updateStoryForState = logModule.updateStoryForState || function () {};
 
   var getProducerCost = PC.getProducerCost;
   var getProducerLevel = PC.getProducerLevel;
@@ -595,6 +596,7 @@
       }
 
       maybeLogMorale(deltaSeconds);
+      updateStoryForState();
       updateStatsUI();
       updateProducersUI();
       updateUpgradesUI();
@@ -610,6 +612,7 @@
     addLog("Santa slides a spreadsheet across the table.");
     addLog("\"Just hit the target,\" he says. \"Whatever it takes.\"");
 
+    updateStoryForState();
     initProducersUI();
     initUpgradesUI();
     recalcPps();

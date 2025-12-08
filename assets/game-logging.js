@@ -598,6 +598,48 @@
     "Someone scribbles 'do not upgrade further' on {name}. You ignore it."
   ];
 
+  var storyTitleEl = document.getElementById("story-title");
+  var storyParagraph1El = document.getElementById("story-paragraph-1");
+  var storyParagraph2El = document.getElementById("story-paragraph-2");
+
+  var STORY_STAGES = [
+    {
+      title: "Santa's Orders",
+      paragraphs: [
+        "Santa has a list. It is long. You are an elf with exactly one job: manufacture an impossible number of presents before dawn.",
+        "Start by clicking the present. Hire assistants. Build factories. Ignore the whispering from the shadows. Definitely do not misread Santa as Satan."
+      ]
+    },
+    {
+      title: "Santa's Expectations",
+      paragraphs: [
+        "The first contracts are signed. Assistants arrive. The spreadsheet gains new columns: Targets, Overages, Acceptable Losses.",
+        "Santa smiles the same way in every poster. You start skipping the part of orientation that mentions 'healthy work-life balance'. There is only work."
+      ]
+    },
+    {
+      title: "Santa's Quotas",
+      paragraphs: [
+        "Factories multiply. Sleep compresses into the gaps between status reports. Your worth is measured in throughput and incident-free hours.",
+        "You stop learning new names. Elves arrive, work, and vanish into the blur of shifts and metrics. Somewhere above you, someone keeps raising the target line."
+      ]
+    },
+    {
+      title: "Santa's Fine Print",
+      paragraphs: [
+        "You linger a little too long on the company letterhead. The curve of the hat, the shape of the letters—something is off, and then you decide it doesn’t matter.",
+        "New opportunities appear in the margins of policy documents: circles, candles, clauses that read like incantations. Compliance training calls them 'alternative fulfillment channels'."
+      ]
+    },
+    {
+      title: "Santa / Satan",
+      paragraphs: [
+        "Rituals are just another line item now. Presents spill from places that are not strictly on the map. You sign your name where you’re told and try not to notice how the ink moves.",
+        "The workshop hums in two registers: machinery and something underneath. Whether the name on the door is Santa or Satan, the quotas remain the same. You intend to hit them."
+      ]
+    }
+  ];
+
   var MORALE_MESSAGES = [
     "Factory morale report: officially 'fine'. The anonymous comments disagree.",
     "An elf suggestion box overflows. Management installs a larger shredder.",
@@ -772,8 +814,9 @@
 
   var recentMessages = [];
   var moraleAccumulator = 0;
+  var lastStoryStageIndex = -1;
 
-  var logListEl = document.getElementById("log");
+  var logListEl = document.getElementBy
 
   function randomFrom(array) {
     if (!array || !array.length) return null;
@@ -865,6 +908,61 @@
     moraleAccumulator = 0;
   }
 
+  function getStoryStageIndex() {
+    var PC = window.PRESENT_CLICKER || {};
+    var state = PC.state;
+    var PRODUCERS = PC.PRODUCERS || [];
+    if (!state) return 0;
+
+    var totalOwned = 0;
+    var hasRitualOwned = false;
+
+    for (var i = 0; i < PRODUCERS.length; i += 1) {
+      var producer = PRODUCERS[i];
+      var owned = state.producersOwned[producer.id] || 0;
+      totalOwned += owned;
+      if (producer.type === "ritual" && owned > 0) {
+        hasRitualOwned = true;
+      }
+    }
+
+    var stage = 0;
+
+    if (totalOwned >= 1) {
+      stage = 1;
+    }
+    if (totalOwned >= 25) {
+      stage = 2;
+    }
+    if (state.flags && state.flags.dyslexiaUnlocked) {
+      stage = 3;
+    }
+    if (hasRitualOwned) {
+      stage = 4;
+    }
+
+    if (stage < 0) stage = 0;
+    if (stage >= STORY_STAGES.length) stage = STORY_STAGES.length - 1;
+
+    return stage;
+  }
+
+  function updateStoryForState() {
+    if (!storyTitleEl || !storyParagraph1El || !storyParagraph2El) return;
+
+    var stageIndex = getStoryStageIndex();
+    if (stageIndex === lastStoryStageIndex) return;
+
+    var stage = STORY_STAGES[stageIndex];
+    if (!stage) return;
+
+    storyTitleEl.textContent = stage.title;
+    storyParagraph1El.textContent = stage.paragraphs[0] || "";
+    storyParagraph2El.textContent = stage.paragraphs[1] || "";
+
+    lastStoryStageIndex = stageIndex;
+  }
+
   function getGatesStageIndex(elapsedSeconds) {
     var minutes = elapsedSeconds / 60;
     if (minutes < 2) return 0;
@@ -896,6 +994,7 @@
     logShopUpgrade: logShopUpgrade,
     maybeLogMorale: maybeLogMorale,
     updateGatesStatus: updateGatesStatus,
+    updateStoryForState: updateStoryForState,
     randomFrom: randomFrom
   };
   window.PRESENT_CLICKER = PC;
