@@ -459,6 +459,74 @@
       "Tray return slots occasionally belch out glitter and smoke.",
       "A new scent is added to the food court: 'Limited Time: Compliance'."
     ],
+    infernal_reindeer_anomaly: [
+      "Flight paths from the Infernal Reindeer Ranch begin intersecting with themselves usefully.",
+      "Reindeer from the Ranch now exit chimneys before they enter them. Delivery time improves.",
+      "A new flight plan labelled 'Anomaly Route' shaves hours off and years off life expectancy.",
+      "Flaming hoofprints appear on rooftops you haven't scheduled yet.",
+      "The Ranch's schedule board now includes a column for 'Nonlinear Departures'.",
+      "Reindeer report seeing themselves on adjacent routes, waving politely.",
+      "Packages from the Ranch arrive smoking slightly but perfectly intact.",
+      "A weather report warns of 'localized reindeer turbulence' over major cities.",
+      "The sleigh corridors overheat, then cool into a new, more efficient pattern.",
+      "Someone adds 'do not question the trajectories' to the Ranch handbook.",
+      "A red streak crosses the sky, then rewinds, then crosses again twice as fast.",
+      "The Ranch fence posts hum as if tracking a thousand invisible flight paths.",
+      "Navigation elves insist the new routes are impossible. The graphs insist otherwise.",
+      "Reindeer antlers glow briefly when they cross an anomalous waypoint.",
+      "The flight tower logs now include a column titled 'Reality Incursions: acceptable'."
+    ],
+    krampus_call_center_anomaly: [
+      "Complaint lines at the Krampus Call Center begin looping back as fresh opportunities.",
+      "Every unresolved ticket splits into two slightly angrier, more productive complaints.",
+      "Hold music at the Call Center now includes a distant chorus of clinking chains.",
+      "The queue dashboard displays 'Average Wait Time: forever', and satisfaction goes up.",
+      "Voicemail transcripts arrive pre-highlighted for maximal punitive potential.",
+      "An angry caller gets placed on hold and somehow generates three more shipments.",
+      "A supervisor notes that dropped calls now count as 'cathartic engagement'.",
+      "The Call Center wallboard gains a metric: 'Curses Per Minute'. It trends upward.",
+      "Customer surveys only contain the option 'very dissatisfied'. This is considered ideal.",
+      "A single ominous 'ding' indicates another complaint successfully weaponized.",
+      "Krampus agents begin answering calls before they ring.",
+      "Call scripts quietly update to include 'threat multiplier' suggestions.",
+      "The Call Center headsets pick up whispers from customers who haven't dialed yet.",
+      "Abandoned calls reappear at the top of the queue with interest.",
+      "Someone suggests turning off the anomaly. The suggestion is logged as a complaint."
+    ],
+    hellmouth_distribution_anomaly: [
+      "The Hellmouth Distribution Node widens its grin. Pallets slip through faster.",
+      "Conveyor belts now feed straight into a glow that stamps parcels on the way out.",
+      "Shipping labels from the Hellmouth arrive already singed at the edges.",
+      "A new loading bay opens directly over a bottomless, efficiently organized pit.",
+      "Forklifts reverse toward the Node and come back lighter and more profitable.",
+      "The Node's manifest includes a column for 'unexplained but accounted for' shipments.",
+      "Warehouse staff stop asking where the packages come from and focus on where they go.",
+      "Safety cones around the Hellmouth quietly migrate closer every shift.",
+      "The Node hums in a low register that perfectly matches the PPS chart.",
+      "A logistics elf notes that nothing falls into the Hellmouth by accident anymore.",
+      "The Node occasionally burps out a fully sorted palette of rush orders.",
+      "Heat from the Hellmouth keeps the loading bay pleasantly, unnervingly warm.",
+      "Someone installs a guardrail. The Node eats it and processes it as raw material.",
+      "Every so often, a package arrives with a return address of 'BELOW'. No one returns it.",
+      "Routing software adds a toggle: 'Prefer eldritch paths (recommended)'."
+    ],
+    santa_council_anomaly: [
+      "The Council of Santas-Demonic convenes in overlapping timelines to sign faster.",
+      "Minutes from the Council meeting arrive before anyone calls it to order.",
+      "Red-suited silhouettes stack in the boardroom like reflections in black glass.",
+      "Every version of Santa signs the same document at once. Ink soaks through realities.",
+      "A bell tolls in the council chamber and quotas adjust themselves upward.",
+      "Petitions now receive a chorus of identical, rubber-stamped approvals.",
+      "The Council's long table appears at slightly different angles each time you look.",
+      "All portraits on the wall turn their heads just enough to watch production graphs.",
+      "Council members speak in unison, but some mouths are half a second late.",
+      "A new policy arrives titled 'On The Efficient Allocation of Cheer and Fear'.",
+      "The Council seal imprints itself on documents you haven't drafted yet.",
+      "Someone takes minutes of the meeting; the pages write ahead of their pen.",
+      "Each time you blink, another chair at the Council table is occupied.",
+      "The agenda item 'Long-Term Consequences' is moved to 'Later' across all timelines.",
+      "A memo from the Council assures you that anomalies are now officially standard practice."
+    ],
     overtime: [
       "Overtime Protocols unlocked. Calendars weep silently.",
       "You extend operating hours. The clocks grow heavy.",
@@ -511,6 +579,24 @@
       "You try to write 'holiday cheer' and the pen insists on 'holiday due'."
     ]
   };
+
+  var SHOP_UPGRADE_FLAVOURS = [
+    "You tighten a few bolts on {name}. It hums at a slightly more worrying pitch.",
+    "A maintenance elf signs off the paperwork: '{name}, now legally upgraded.'",
+    "{name} shudders through its calibration cycle and settles into a faster rhythm.",
+    "Somewhere in the manual for {name}, a new page about 'acceptable anomalies' appears.",
+    "The status light on {name} shifts from green to a determined, slightly manic green.",
+    "{name} announces its new level with a clank that sounds almost triumphant.",
+    "Safety labels on {name} quietly resize themselves to make room for new warnings.",
+    "An engineer shrugs: '{name} should be fine at level {level}. Probably.'",
+    "You flip a switch on {name}; it purrs like a content, overworked monster.",
+    "{name} reports 'throughput nominal*'. The asterisk points to a scorched corner.",
+    "A fresh log entry appears: '{name} upgraded to level {level}. Side effects: festive.'",
+    "You swear the shadows around {name} lean in as the upgrade completes.",
+    "{name} sheds a few loose screws, like it didn’t need them anyway.",
+    "Calibration for {name} completes with a sound suspiciously like laughter.",
+    "Someone scribbles 'do not upgrade further' on {name}. You ignore it."
+  ];
 
   var MORALE_MESSAGES = [
     "Factory morale report: officially 'fine'. The anonymous comments disagree.",
@@ -735,6 +821,18 @@
     addLog(msg);
   }
 
+  function logShopUpgrade(producer, newLevel) {
+    var msg = randomFrom(SHOP_UPGRADE_FLAVOURS);
+    if (msg) {
+      msg = msg
+        .replace(/\{name\}/g, producer.name)
+        .replace(/\{level\}/g, String(newLevel));
+    } else {
+      msg = "You push " + producer.name + " up to level " + newLevel + ". It sounds less stable.";
+    }
+    addLog(msg);
+  }
+
   function maybeLogMorale(deltaSeconds) {
     moraleAccumulator += deltaSeconds;
     if (moraleAccumulator < 25) return; // wait at least 25s before considering
@@ -795,6 +893,7 @@
     addLog: addLog,
     logProducerPurchase: logProducerPurchase,
     logUpgradePurchase: logUpgradePurchase,
+    logShopUpgrade: logShopUpgrade,
     maybeLogMorale: maybeLogMorale,
     updateGatesStatus: updateGatesStatus,
     randomFrom: randomFrom

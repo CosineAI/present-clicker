@@ -23,6 +23,7 @@
   var addLog = logModule.addLog || function () {};
   var logProducerPurchase = logModule.logProducerPurchase || function () {};
   var logUpgradePurchase = logModule.logUpgradePurchase || function () {};
+  var logShopUpgrade = logModule.logShopUpgrade || function () {};
   var maybeLogMorale = logModule.maybeLogMorale || function () {};
   var updateGatesStatus = logModule.updateGatesStatus || function () {};
 
@@ -199,6 +200,10 @@
 
     spendPresents(upgradeCost);
     state.producerLevels[id] = (state.producerLevels[id] || 1) + 1;
+    var newLevel = state.producerLevels[id];
+
+    addLog("You upgrade " + producer.name + " to level " + newLevel + ".");
+    logShopUpgrade(producer, newLevel);
 
     recalcPps();
     updateStatsUI();

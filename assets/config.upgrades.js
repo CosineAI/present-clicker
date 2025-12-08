@@ -131,6 +131,38 @@ window.PRESENT_CLICKER_UPGRADES = [
     unlock: { pps: 2500000 }
   },
   {
+    id: "infernal_reindeer_anomaly",
+    name: "Reindeer Flight Anomaly",
+    description: "Infernal Reindeer Ranch tears shortcut paths through impossible chimneys. Ranch output x3.",
+    cost: 2000000000,
+    effect: { type: "producerMultiplier", targetId: "infernal_reindeer_ranch", value: 3 },
+    unlock: { pps: 20000000 }
+  },
+  {
+    id: "krampus_call_center_anomaly",
+    name: "Complaint Echo Anomaly",
+    description: "Every unresolved ticket echoes twice as loud. Krampus Call Center output x3.",
+    cost: 9000000000,
+    effect: { type: "producerMultiplier", targetId: "krampus_call_center", value: 3 },
+    unlock: { pps: 100000000 }
+  },
+  {
+    id: "hellmouth_distribution_anomaly",
+    name: "Hellmouth Throughput Anomaly",
+    description: "The Distribution Node yawns wider. Hellmouth output x3.",
+    cost: 40000000000,
+    effect: { type: "producerMultiplier", targetId: "hellmouth_distribution_node", value: 3 },
+    unlock: { pps: 500000000 }
+  },
+  {
+    id: "santa_council_anomaly",
+    name: "Council Convergence Anomaly",
+    description: "The Council of Santas overlap across realities. Council output x3.",
+    cost: 200000000000,
+    effect: { type: "producerMultiplier", targetId: "santa_demon_council", value: 3 },
+    unlock: { pps: 2000000000 }
+  },
+  {
     id: "assistant_whip",
     name: "Ergonomic Whips",
     description: "Assistants work twice as fast.",
