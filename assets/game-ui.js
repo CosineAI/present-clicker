@@ -525,6 +525,7 @@
     addLog("You OPEN THE GATES. The Ritual Circle roars like a distant furnace.");
     updateGatesBodyClass();
     recalcPps();
+    updateStoryForState();
   }
 
   function closeGates() {
@@ -532,8 +533,10 @@
 
     state.gates.open = false;
     addLog("You CLOSE THE GATES. The workshop exhales, if only a little.");
+    addLog("The gates of hell have been closed again and business has returned. But you will be back. Everyone always comes back. HE is not worried.");
     updateGatesBodyClass();
     recalcPps();
+    updateStoryForState();
   }
 
   function toggleGates() {

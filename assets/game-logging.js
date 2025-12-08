@@ -648,8 +648,8 @@
     {
       title: "Santa / Satan",
       paragraphs: [
-        "Rituals are just another line item now. Presents spill from places that are not strictly on the map. You sign your name where you’re told and try not to notice how the ink moves.",
-        "The workshop hums in two registers: machinery and something underneath. Whether the name on the door is Santa or Satan, the quotas remain the same. You intend to hit them."
+        "The Gates are just another control now: OPEN for peak throughput, CLOSE for plausible deniability. The floor plan remembers the heat even when the doors shut.",
+        "Hell has a service-level agreement. Whether the name on the door reads Santa or Satan, shipments flow, targets rise, and you know you’ll open the Gates again. He knows it too."
       ]
     }
   ];
