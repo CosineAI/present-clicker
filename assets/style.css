@@ -345,6 +345,98 @@ main.game-shell {
   cursor: default;
 }
 
+/* Dev console */
+
+.dev-console {
+  position: fixed;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  width: 320px;
+  max-height: 70vh;
+  background: rgba(15, 23, 42, 0.98);
+  color: #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+  font-size: 0.78rem;
+  display: none;
+  flex-direction: column;
+  z-index: 50;
+}
+
+.dev-console--visible {
+  display: flex;
+}
+
+.dev-console-header {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dev-console-title {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dev-console-body {
+  padding: 0.45rem 0.75rem 0.6rem;
+  overflow-y: auto;
+}
+
+.dev-console-section {
+  margin-bottom: 0.55rem;
+}
+
+.dev-console-section-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.dev-console-row {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.15rem;
+}
+
+.dev-console-row label {
+  flex: 1 1 auto;
+}
+
+.dev-console-input {
+  width: 72px;
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: rgba(15, 23, 42, 0.9);
+  color: #f9fafb;
+  font-size: 0.72rem;
+}
+
+.dev-console-button {
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: rgba(30, 64, 175, 0.95);
+  color: #f9fafb;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.dev-console-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.dev-console-hint {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  margin-top: 0.15rem;
+}
+
 .shop-card-flavor {
   font-size: 0.75rem;
   font-style: italic;
