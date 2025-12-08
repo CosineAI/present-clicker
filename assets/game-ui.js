@@ -45,6 +45,11 @@
   var producersListEl = document.getElementById("producers-list");
   var upgradesListEl = document.getElementById("upgrades-list");
   var shopsToggleButton = document.getElementById("shops-toggle-button");
+  var settingsButton = document.getElementById("settings-button");
+  var settingsModal = document.getElementById("settings-modal");
+  var settingsCloseButton = settingsModal
+    ? settingsModal.querySelector(".settings-close-button")
+    : null;
 
   if (!presentButton || !presentCountEl || !ppsCountEl || !ppcCountEl) {
     return;
@@ -147,15 +152,12 @@
 
       var revealAll = state.shopsVisible;
       var purchased = state.purchasedUpgrades.has(upgrade.id);
-      if (purchased) {
-        view.card.style.display = "none";
-        return;
-      }
 
       // Whether the player has progressed far enough to buy this upgrade.
       var meetsUnlock = isUpgradeUnlocked(upgrade);
 
-      if (!meetsUnlock && !revealAll) {
+      // Hide only if not purchased, not unlocked, and not in reveal-all mode.
+      if (!purchased && !meetsUnlock && !revealAll) {
         view.card.style.display = "none";
         return;
       }
@@ -164,9 +166,23 @@
 
       view.costEl.textContent = "Cost: " + formatNumber(upgrade.cost) + " 🎁";
 
-      // Only clickable if both unlocked by progress and affordable.
-      var canAfford = state.presents >= upgrade.cost && meetsUnlock;
-      view.card.disabled = !canAfford;
+      if (purchased) {
+        // Keep purchased upgrades visible in place with a checkmark and greyed-out style.
+        view.card.disabled = true;
+        view.card.classList.add("shop-card--purchased");
+        if (view.purchasedEl) {
+          view.purchasedEl.style.display = "";
+        }
+      } else {
+        // Available upgrades remain clickable if affordable.
+        view.card.classList.remove("shop-card--purchased");
+        if (view.purchasedEl) {
+          view.purchasedEl.style.display = "none";
+        }
+
+        var canAfford = state.presents >= upgrade.cost && meetsUnlock;
+        view.card.disabled = !canAfford;
+      }
     });
 
     updateGatesUI();
@@ -368,7 +384,13 @@
       var costEl = document.createElement("span");
       costEl.className = "shop-card-cost";
 
+      var purchasedEl = document.createElement("span");
+      purchasedEl.className = "shop-card-purchased-mark";
+      purchasedEl.textContent = "✓ purchased";
+      purchasedEl.style.display = "none";
+
       meta.appendChild(costEl);
+      meta.appendChild(purchasedEl);
       bottom.appendChild(meta);
 
       card.appendChild(top);
@@ -382,7 +404,8 @@
 
       upgradeViews.set(upgrade.id, {
         card: card,
-        costEl: costEl
+        costEl: costEl,
+        purchasedEl: purchasedEl
       });
     });
 
@@ -462,6 +485,18 @@
     updateUpgradesUI();
   }
 
+  function openSettingsModal() {
+    if (!settingsModal || !settingsButton) return;
+    settingsModal.removeAttribute("hidden");
+    settingsButton.setAttribute("aria-expanded", "true");
+  }
+
+  function closeSettingsModal() {
+    if (!settingsModal || !settingsButton) return;
+    settingsModal.setAttribute("hidden", "");
+    settingsButton.setAttribute("aria-expanded", "false");
+  }
+
   function attachEvents() {
     presentButton.addEventListener("click", function () {
       presentButton.classList.add("present-button--clicked");
@@ -475,6 +510,37 @@
       shopsToggleButton.addEventListener("click", function () {
         state.shopsVisible = !state.shopsVisible;
         updateShopsVisibility();
+      });
+    }
+
+    if (settingsButton && settingsModal) {
+      settingsButton.addEventListener("click", function () {
+        var isOpen = !settingsModal.hasAttribute("hidden");
+        if (isOpen) {
+          closeSettingsModal();
+        } else {
+          openSettingsModal();
+        }
+      });
+
+      if (settingsCloseButton) {
+        settingsCloseButton.addEventListener("click", function () {
+          closeSettingsModal();
+        });
+      }
+
+      settingsModal.addEventListener("click", function (event) {
+        if (event.target === settingsModal) {
+          closeSettingsModal();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" || event.key === "Esc") {
+          if (!settingsModal.hasAttribute("hidden")) {
+            closeSettingsModal();
+          }
+        }
       });
     }
 

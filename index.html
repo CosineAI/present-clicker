@@ -3,14 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Present Clicker: Elf on the Brink</title>
+  <title>You are an overworked elf. Santa wants numbers, not excuses.</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header>
-    <h1>Present Clicker</h1>
-    <p class="tagline">You are an overworked elf. Santa wants numbers, not excuses.</p>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>You are an overworked elf. Santa wants numbers, not excuses.</h1>
+      </div>
+      <button
+        id="settings-button"
+        class="settings-button"
+        type="button"
+        aria-haspopup="dialog"
+        aria-controls="settings-modal"
+        aria-expanded="false"
+      >
+        Settings
+      </button>
+    </div>
   </header>
+
+  <div
+    id="settings-modal"
+    class="settings-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="settings-modal-title"
+    hidden
+  >
+    <div class="settings-modal-dialog">
+      <div class="settings-modal-header">
+        <h2 id="settings-modal-title">Workshop Settings</h2>
+        <button type="button" class="settings-close-button" aria-label="Close settings">×</button>
+      </div>
+      <div class="settings-modal-body">
+        <p class="settings-intro">
+          Small tweaks to how the workshop presents information.
+        </p>
+        <div class="settings-row">
+          <div class="settings-row-label">
+            <div class="settings-row-title">Shop visibility</div>
+            <div class="settings-row-help">
+              Toggle to reveal all shops &amp; upgrades, or only show what you've unlocked.
+            </div>
+          </div>
+          <button id="shops-toggle-button" class="shops-toggle-button" type="button" aria-pressed="true">
+            Show only unlocked
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <main class="game-shell">
     <section class="game-left">
@@ -53,11 +98,6 @@
     </section>
 
     <section class="game-right">
-      <section class="shop-toggle">
-        <button id="shops-toggle-button" class="shops-toggle-button" type="button" aria-pressed="true">
-          Hide shops &amp; upgrades
-        </button>
-      </section>
 
       <section class="shop-panel">
         <h2>Helpers &amp; Factories</h2>
@@ -77,9 +117,7 @@
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Present Clicker &mdash; North Pole Logistics Division</p>
-  </footer>
+  
 
   <script src="assets/config.producers.js"></script>
   <script src="assets/config.upgrades.js"></script>
