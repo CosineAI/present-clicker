@@ -133,22 +133,22 @@ main.game-shell {
 /* Present button */
 
 .present-button {
-  margin-top: 1.1rem;
+  margin: 0 auto 1.2rem auto;
   width: 100%;
   border-radius: 18px;
-  border: 3px solid #b91c1c;
-  padding: 2.4rem 1.2rem;
-  background: #16a34a; /* green */
-  color: #0b1120;
+  border: none;
+  padding: 1.6rem 1.2rem;
+  background: transparent;
+  color: inherit;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 12px 24px rgba(15,23,42,0.6);
+  box-shadow: none;
   position: relative;
-  overflow: hidden;
-  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, filter 0.12s ease-out;
+  overflow: visible;
+  transition: transform 0.08s ease-out, filter 0.12s ease-out;
 }
 
 .present-button::before {
@@ -156,8 +156,8 @@ main.game-shell {
 }
 
 .present-emoji {
-  font-size: 4.8rem;
-  filter: drop-shadow(0 8px 14px rgba(15,23,42,0.7));
+  font-size: 5.6rem;
+  filter: drop-shadow(0 10px 18px rgba(15,23,42,0.8));
 }
 
 .present-button:active,
