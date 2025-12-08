@@ -3,16 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Static Site</title>
+  <title>Present Clicker: Elf on the Brink</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <main>
-    <h1>Welcome to Your Static Site</h1>
+  <header>
+    <h1>Present Clicker</h1>
+    <p class="tagline">You are an overworked elf. Santa wants numbers, not excuses.</p>
+  </header>
+
+  <main class="game-shell">
+    <section class="game-left">
+      <section class="story-panel">
+        <h2>Santa's Orders</h2>
+        <p>
+          Santa has a list. It is long. You are an elf with exactly one job:
+          manufacture an impossible number of presents before dawn.
+        </p>
+        <p>
+          Start by clicking the present. Hire assistants. Build factories.
+          Ignore the whispering from the shadows. Definitely do not misread
+          <strong>Santa</strong> as <strong>Satan</strong>.
+        </p>
+      </section>
+
+      <section class="stats-panel">
+        <div class="stat">
+          <span class="stat-label">Presents</span>
+          <span class="stat-value" id="present-count">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Per second</span>
+          <span class="stat-value" id="pps-count">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Per click</span>
+          <span class="stat-value" id="ppc-count">1</span>
+        </div>
+      </section>
+
+      <button id="present-button" class="present-button" type="button">
+        <div class="present-emoji" aria-hidden="true">🎁</div>
+        <div class="present-text-main">MAKE PRESENTS</div>
+        <div class="present-text-sub">The children are watching.</div>
+      </button>
+
+      <section class="log-panel" aria-live="polite" aria-atomic="false">
+        <h2 class="log-title">Workshop Rumours</h2>
+        <ul id="log" class="log-list"></ul>
+      </section>
+    </section>
+
+    <section class="game-right">
+      <section class="shop-panel">
+        <h2>Helpers &amp; Factories</h2>
+        <p class="shop-hint">
+          Spend presents to automate production. Costs rise each time you buy.
+        </p>
+        <div id="producers-list" class="card-list"></div>
+      </section>
+
+      <section class="shop-panel">
+        <h2>Upgrades &amp; Anomalies</h2>
+        <p class="shop-hint">
+          Tweaks, exploits, and reality violations to boost productivity.
+        </p>
+        <div id="upgrades-list" class="card-list"></div>
+      </section>
+    </section>
   </main>
+
   <footer>
-    <p>&copy; 2025 Your Name</p>
+    <p>&copy; 2025 Present Clicker &mdash; North Pole Logistics Division</p>
   </footer>
+
   <script src="assets/script.js"></script>
 </body>
 </html>
