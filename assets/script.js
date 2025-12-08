@@ -711,8 +711,6 @@
         upgradeCostEl: upgradeCostEl
       });
     });
-  });
-    });
   }
 
   function initUpgradesUI() {
