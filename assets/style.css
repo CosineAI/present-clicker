@@ -239,7 +239,6 @@ main.game-shell {
   gap: 0.9rem;
   margin-top: auto;
 }
-}
 
 .stat {
   flex: 1 1 0;
@@ -766,7 +765,6 @@ footer {
 @media (max-width: 980px) {
   main.game-shell {
     grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
-    padding: 1.8rem 1rem 2.1rem;
   }
 }
 
