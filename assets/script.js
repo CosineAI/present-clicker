@@ -512,9 +512,15 @@
     });
   }
 
-  function updateShopsVisibility() {     var producersPanel = producersListEl ? producersListEl.parentElement : null;    var  upgradesPanel = upgradesListEl ? upgradesListEl.parentElement : null;    var  visible = state.shopsVisible;
-    if (producersPanel) {     ) producersPanel.style.display = visible ? "" : "none";   n }    if  (upgradesPanel) {
-sPanel) {
+  function updateShopsVisibility() {
+    var producersPanel = producersListEl ? producersListEl.parentElement : null;
+    var upgradesPanel = upgradesListEl ? upgradesListEl.parentElement : null;
+    var visible = state.shopsVisible;
+
+    if (producersPanel) {
+      producersPanel.style.display = visible ? "" : "none";
+    }
+    if (upgradesPanel) {
       upgradesPanel.style.display = visible ? "" : "none";
     }
 
@@ -522,8 +528,6 @@ sPanel) {
       shopsToggleButton.textContent = visible ? "Hide shops & upgrades" : "Show shops & upgrades";
       shopsToggleButton.setAttribute("aria-pressed", visible ? "true" : "false");
     }
-  });
-  });
   }
 
   function updateUpgradesUI() {
@@ -892,8 +896,6 @@ sPanel) {
       if (event.key === "d" || event.key === "D") {
         toggleDevConsole();
       }
-    });
-  }
     });
   }
 
