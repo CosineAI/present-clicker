@@ -303,7 +303,7 @@ main.game-shell {
   border: 1px solid rgba(248, 250, 252, 0.35);
   background: rgba(15, 23, 42, 0.96);
   padding: 0.65rem 0.7rem 0.7rem;
-  cursor: default;
+  cursor: pointer;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -357,6 +357,10 @@ main.game-shell {
   gap: 0.25rem;
 }
 
+.shop-card-upgrade-row {
+  margin-top: 0.2rem;
+}
+
 .shop-card-meta {
   display: flex;
   flex-wrap: wrap;
@@ -388,8 +392,7 @@ main.game-shell {
 }
 
 .shop-card-upgrade-button {
-  margin-left: auto;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 999px;
   border: 1px solid rgba(248, 250, 252, 0.6);
   background: rgba(15, 23, 42, 0.95);
@@ -399,7 +402,6 @@ main.game-shell {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  max-width: 52%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

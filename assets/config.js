@@ -149,6 +149,70 @@ window.PRESENT_CLICKER_UPGRADES = [
     unlock: { totalPresents: 15000000 }
   },
   {
+    id: "assistant_espresso_machine",
+    name: "Elf Espresso Machine",
+    description: "Assistant Elves discover triple-shot lattes. Assistants x2.",
+    cost: 1200,
+    effect: { type: "typeMultiplier", targetType: "assistant", value: 2 },
+    unlock: { totalPresents: 800 }
+  },
+  {
+    id: "assistant_clone_program",
+    name: "Assistant Cloning Program",
+    description: "It's not overtime if there are more of them. Assistant Elf output x3.",
+    cost: 60000,
+    effect: { type: "producerMultiplier", targetId: "assistant_elf", value: 3 },
+    unlock: { totalPresents: 40000 }
+  },
+  {
+    id: "workshop_bunkbeds",
+    name: "Workshop Bunkbeds",
+    description: "Nobody ever has to leave. Small Workshop output x2.",
+    cost: 35000,
+    effect: { type: "producerMultiplier", targetId: "small_workshop", value: 2 },
+    unlock: { totalPresents: 25000 }
+  },
+  {
+    id: "assembly_overclock",
+    name: "Overclocked Assembly Lines",
+    description: "The assembly lines start ignoring safety warnings. Assembly Lines x2.",
+    cost: 150000,
+    effect: { type: "producerMultiplier", targetId: "assembly_line", value: 2 },
+    unlock: { totalPresents: 90000 }
+  },
+  {
+    id: "sweatshop_global_sourcing",
+    name: "Global Sourcing Anomaly",
+    description: "Offshore Sweatshops find suppliers in places that shouldn’t exist. Output x2.",
+    cost: 900000,
+    effect: { type: "producerMultiplier", targetId: "offshore_sweatshop", value: 2 },
+    unlock: { totalPresents: 550000 }
+  },
+  {
+    id: "warehouse_non_euclidean_layout",
+    name: "Non-Euclidean Shelving",
+    description: "The Fulfillment Center folds space. Warehouse output x3.",
+    cost: 7500000,
+    effect: { type: "producerMultiplier", targetId: "interdimensional_warehouse", value: 3 },
+    unlock: { totalPresents: 4000000 }
+  },
+  {
+    id: "ritual_blood_signed_contracts",
+    name: "Blood-Signed Contracts",
+    description: "Ritual Circles bind a little tighter. Ritual output x2.",
+    cost: 40000000,
+    effect: { type: "typeMultiplier", targetType: "ritual", value: 2 },
+    unlock: { pps: 500000 }
+  },
+  {
+    id: "mall_food_court_entity",
+    name: "Food Court Entity",
+    description: "The Mall’s food court wakes up hungry for quotas. Mall Rituals x2.",
+    cost: 150000000,
+    effect: { type: "producerMultiplier", targetId: "abandoned_mall_ritual", value: 2 },
+    unlock: { pps: 2500000 }
+  },
+  {
     id: "assistant_whip",
     name: "Ergonomic Whips",
     description: "Assistants work twice as fast.",

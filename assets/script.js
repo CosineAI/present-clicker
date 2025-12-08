@@ -104,6 +104,46 @@
       "The Assistants speed up. Their enthusiasm is not consulted.",
       "Whips crack. Spreadsheets cheer. Elves update their résumés."
     ],
+    assistant_espresso_machine: [
+      "An espresso machine appears in the break room. The Assistants stop blinking.",
+      "New policy: one espresso shot per elf per click.",
+      "The coffee smells faintly of brimstone and productivity."
+    ],
+    assistant_clone_program: [
+      "The Assistant Cloning Program spins up. HR opens a new spreadsheet tab.",
+      "You are no longer sure how many Assistant Elves you employ. Output says: enough.",
+      "More elves clock in than clocked out. Nobody questions it."
+    ],
+    workshop_bunkbeds: [
+      "Bunkbeds go up in the Small Workshops. Commutes go down to zero.",
+      "Someone calls the new arrangements 'cozy'. Someone else calls a lawyer.",
+      "The workshops now smell like cocoa, solvent, and shared dreams of escape."
+    ],
+    assembly_overclock: [
+      "You overclock the Assembly Lines. The safety manual spontaneously combusts.",
+      "Warning lights flash. Output rises. You pretend not to see the warning lights.",
+      "An engineer tapes over the 'Do Not Exceed' line. The line has never been happier."
+    ],
+    sweatshop_global_sourcing: [
+      "Global Sourcing kicks in. Packages now arrive from places not on any map.",
+      "Supply chains vanish into a red string diagram and reappear faster.",
+      "Accountants nod approvingly at the new 'off-chart' suppliers."
+    ],
+    warehouse_non_euclidean_layout: [
+      "Shelves reconfigure themselves into angles you can’t quite look at.",
+      "Pickers report that every aisle is now the closest aisle.",
+      "The Fulfillment Center starts shipping items before the order is finished."
+    ],
+    ritual_blood_signed_contracts: [
+      "The ink in the contract darkens several shades. Ritual output surges.",
+      "Someone signs in something that is technically red. The circles glow brighter.",
+      "New clauses appear in the contracts in very small, very sharp print."
+    ],
+    mall_food_court_entity: [
+      "The Food Court Entity awakens and demands higher quotas and extra sauce.",
+      "A voice over the mall PA whispers deals too good to be mortal.",
+      "The pretzel stand starts chanting. Package throughput improves dramatically."
+    ],
     overtime: [
       "Mandatory Overtime is announced via a cheerful email.",
       "Factory lights stay on past midnight; the clocks politely look away.",
@@ -615,12 +655,8 @@
       var meta = document.createElement("div");
       meta.className = "shop-card-meta";
 
-      var costEl = document.createElement("button");
-      costEl.type = "button";
+      var costEl = document.createElement("span");
       costEl.className = "shop-card-cost";
-      costEl.addEventListener("click", function () {
-        buyProducer(producer.id);
-      });
 
       var ppsEl = document.createElement("span");
       ppsEl.className = "shop-card-pps";
@@ -628,30 +664,40 @@
       var levelEl = document.createElement("span");
       levelEl.className = "shop-card-level";
 
+      meta.appendChild(costEl);
+      meta.appendChild(ppsEl);
+      meta.appendChild(levelEl);
+
+      var flavorEl = document.createElement("div");
+      flavorEl.className = "shop-card-flavor";
+      flavorEl.textContent = producer.flavor || "";
+
+      var upgradeRow = document.createElement("div");
+      upgradeRow.className = "shop-card-upgrade-row";
+
       var upgradeButton = document.createElement("button");
       upgradeButton.type = "button";
       upgradeButton.className = "shop-card-upgrade-button";
       var upgradeCostEl = document.createElement("span");
       upgradeCostEl.className = "shop-card-upgrade-cost";
       upgradeButton.appendChild(upgradeCostEl);
-      upgradeButton.addEventListener("click", function () {
+      upgradeButton.addEventListener("click", function (event) {
+        event.stopPropagation();
         upgradeProducer(producer.id);
       });
 
-      meta.appendChild(costEl);
-      meta.appendChild(ppsEl);
-      meta.appendChild(levelEl);
-      meta.appendChild(upgradeButton);
-
-      var flavorEl = document.createElement("div");
-      flavorEl.className = "shop-card-flavor";
-      flavorEl.textContent = producer.flavor || "";
+      upgradeRow.appendChild(upgradeButton);
 
       bottom.appendChild(meta);
       bottom.appendChild(flavorEl);
+      bottom.appendChild(upgradeRow);
 
       card.appendChild(top);
       card.appendChild(bottom);
+
+      card.addEventListener("click", function () {
+        buyProducer(producer.id);
+      });
 
       producersListEl.appendChild(card);
 
@@ -664,6 +710,8 @@
         upgradeButton: upgradeButton,
         upgradeCostEl: upgradeCostEl
       });
+    });
+  });
     });
   }
 
