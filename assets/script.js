@@ -107,6 +107,64 @@
     });
   }
 
+  function randomFrom(array) {
+    if (!array || !array.length) return null;
+    var index = Math.floor(Math.random() * array.length);
+    return array[index];
+  }
+
+  function logProducerPurchase(producer, ownedCount) {
+    // Special case: first ever Assistant Elf keeps its narrative hook.
+    if (producer.id === "assistant_elf" && ownedCount === 1) {
+      addLog("You hire your first Assistant Elf. They look both eager and terrified.");
+      return;
+    }
+
+    var pool = PRODUCER_FLAVOURS[producer.id];
+    var msg = randomFrom(pool);
+    if (!msg) {
+      msg = "Another " + producer.name + " joins the production nightmare.";
+    }
+    addLog(msg);
+  }
+
+  function logUpgradePurchase(upgrade) {
+    var pool = UPGRADE_FLAVOURS[upgrade.id];
+    var msg = randomFrom(pool);
+    if (!msg) {
+      msg = "You tinker with the spreadsheets. \"" + upgrade.name + "\" takes effect.";
+    }
+    addLog(msg);
+  }
+
+  function maybeLogMorale(deltaSeconds) {
+    moraleAccumulator += deltaSeconds;
+    if (moraleAccumulator < 25) return; // wait at least 25s before considering
+
+    // Only log morale if you actually have factories running.
+    var hasFactory = false;
+    for (var i = 0; i < PRODUCERS.length; i += 1) {
+      var p = PRODUCERS[i];
+      if (p.type === "factory" && (state.producersOwned[p.id] || 0) > 0) {
+        hasFactory = true;
+        break;
+      }
+    }
+    if (!hasFactory) return;
+
+    // Random chance, but guarantee something at least every ~60s once factories exist.
+    var shouldLog = Math.random() < 0.3 || moraleAccumulator > 60;
+    if (!shouldLog) return;
+
+    var msg = randomFrom(MORALE_MESSAGES);
+    if (msg) {
+      addLog(msg);
+    }
+
+    moraleAccumulator = 0;
+  });
+  }
+
   function getProducerCost(producer) {
     var owned = state.producersOwned[producer.id] || 0;
     var cost = producer.baseCost * Math.pow(producer.costMultiplier, owned);
@@ -278,9 +336,7 @@
     spendPresents(cost);
     state.producersOwned[id] = (state.producersOwned[id] || 0) + 1;
 
-    if (id === "assistant_elf" && state.producersOwned[id] === 1) {
-      addLog("You hire your first Assistant Elf. They look both eager and terrified.");
-    }
+    logProducerPurchase(producer, state.producersOwned[id]);
 
     recalcPps();
     updateStatsUI();
@@ -319,6 +375,8 @@
     applyUpgradeEffect(upgrade);
 
     addLog(upgrade.name + " acquired.");
+    logUpgradePurchase(upgrade);
+
     updateStatsUI();
     updateProducersUI();
     updateUpgradesUI();
@@ -512,11 +570,13 @@
         earnPresents(gained);
       }
 
+      maybeLogMorale(deltaSeconds);
       updateStatsUI();
       updateProducersUI();
       updateUpgradesUI();
       updateDevConsole();
     }, 100);
+  }, 100);
   }
 
   function buildDevConsole() {
