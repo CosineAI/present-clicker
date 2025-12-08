@@ -33,32 +33,26 @@ body.gates-open {
 
 body.gates-open main {
   background: radial-gradient(circle at top, #1f2937 0, #111827 45%, #000000 100%);
-  box-shadow: 0 0 50px rgba(220, 38, 38, 0.9);
 }
 
 body.gates-open header {
   background: #7f1d1d;
-  box-shadow: 0 0 35px rgba(248, 113, 113, 0.9);
 }
 
 body.gates-open footer {
   background: #450a0a;
-  box-shadow: 0 -4px 30px rgba(127, 29, 29, 0.9);
 }
 
 body.gates-open .stat {
   background: linear-gradient(135deg, #b91c1c, #ef4444);
-  box-shadow: 0 10px 25px rgba(248, 113, 113, 0.9);
 }
 
 body.gates-open .shop-panel {
   background: radial-gradient(circle at top left, #450a0a, #7f1d1d);
-  box-shadow: 0 18px 40px rgba(248, 113, 113, 0.95);
 }
 
 body.gates-open .log-panel {
   background: rgba(17, 24, 39, 0.98);
-  box-shadow: 0 12px 30px rgba(248, 113, 113, 0.85);
 }
 
 body.gates-open .story-panel {
@@ -105,7 +99,6 @@ header {
   padding: 1.2rem 0 1.2rem;
   text-align: center;
   letter-spacing: 0.04em;
-  box-shadow: 0 2px 10px rgba(127, 29, 29, 0.6);
   position: relative;
   z-index: 1;
 }
@@ -148,7 +141,6 @@ header .tagline {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(15,23,42,0.8);
 }
 
 .settings-button:hover {
@@ -175,7 +167,6 @@ main {
   background: #fefce8; /* warm parchment for cozy feel */
   padding: 2.3rem 1rem 2.3rem;
   border-radius: 18px;
-  box-shadow: 0 18px 55px rgba(15,23,42,0.35), 0 6px 15px rgba(15,23,42,0.3);
   display: block;
   min-height: 0;
   position: relative;
@@ -246,7 +237,6 @@ main.game-shell {
   padding: 0.8rem 0.9rem;
   border-radius: 14px;
   border: 1px solid rgba(248, 250, 252, 0.35);
-  box-shadow: 0 8px 20px rgba(21, 128, 61, 0.6);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -300,7 +290,6 @@ main.game-shell {
 .present-button:active,
 .present-button.present-button--clicked {
   transform: scale(0.97) translateY(2px);
-  box-shadow: 0 5px 12px rgba(15,23,42,0.7);
   filter: brightness(0.95);
 }
 
@@ -312,7 +301,6 @@ main.game-shell {
   border-radius: 14px;
   background: rgba(15, 23, 42, 0.92);
   color: #fefce8;
-  box-shadow: 0 10px 25px rgba(15,23,42,0.9);
   flex: 0 0 auto;
   min-height: 180px;
   max-height: 220px;
@@ -357,7 +345,6 @@ main.game-shell {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(15,23,42,0.8);
 }
 
 .shops-toggle-button:hover {
@@ -389,7 +376,6 @@ main.game-shell {
   z-index: 1;
   background: #fefce8;
   border-radius: 16px;
-  box-shadow: 0 18px 40px rgba(15,23,42,0.85);
   max-width: 420px;
   width: calc(100% - 3rem);
   padding: 1rem 1.25rem 1.1rem;
@@ -467,7 +453,6 @@ main.game-shell {
   color: #fefce8;
   border-radius: 16px;
   padding: 0.7rem 0.75rem 0.8rem;
-  box-shadow: 0 14px 28px rgba(127,29,29,0.9);
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -513,7 +498,6 @@ main.game-shell {
 
 .shop-card:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(15,23,42,0.95);
   border-color: rgba(254, 249, 195, 0.95);
   background: linear-gradient(135deg, #166534, #16a34a);
 }
@@ -629,7 +613,6 @@ main.game-shell {
   background: rgba(15, 23, 42, 0.98);
   color: #e5e7eb;
   border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
   font-size: 0.78rem;
   display: none;
   flex-direction: column;
@@ -725,7 +708,6 @@ main.game-shell {
 
 .shop-card--ritual:hover:not(:disabled) {
   background: radial-gradient(circle at top left, rgba(248,113,113,0.95), rgba(15,23,42,1));
-  box-shadow: 0 0 25px rgba(248,113,113,0.9);
 }
 
 /* Upgrades styling */
@@ -742,7 +724,6 @@ footer {
   margin-top: 2.4rem;
   border-radius: 0 0 18px 18px;
   font-size: 0.95rem;
-  box-shadow: 0 -2px 12px 0 rgba(15,23,42,0.72);
   flex-shrink: 0;
 }
 
