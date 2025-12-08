@@ -618,6 +618,13 @@
       ]
     },
     {
+      title: "Santa's Metrics",
+      paragraphs: [
+        "Dashboards bloom across the walls. Colored bars climb, or they don't, and your stomach rises and falls with them.",
+        "Your days become a sequence of reviews, corrective actions, and mandatory cheer. You talk about elves as 'headcount' and children as 'demand'."
+      ]
+    },
+    {
       title: "Santa's Quotas",
       paragraphs: [
         "Factories multiply. Sleep compresses into the gaps between status reports. Your worth is measured in throughput and incident-free hours.",
@@ -629,6 +636,13 @@
       paragraphs: [
         "You linger a little too long on the company letterhead. The curve of the hat, the shape of the letters—something is off, and then you decide it doesn’t matter.",
         "New opportunities appear in the margins of policy documents: circles, candles, clauses that read like incantations. Compliance training calls them 'alternative fulfillment channels'."
+      ]
+    },
+    {
+      title: "Santa's Bargain",
+      paragraphs: [
+        "The first circles are drawn in out-of-the-way corners, then given asset tags. Incense smoke is logged as 'atmospheric variance'.",
+        "You tell yourself it’s still toy making, even if the raw materials now include ash, echo, and signatures that sting your fingertips."
       ]
     },
     {
@@ -915,30 +929,47 @@
     if (!state) return 0;
 
     var totalOwned = 0;
-    var hasRitualOwned = false;
+    var ritualOwnedCount = 0;
 
     for (var i = 0; i < PRODUCERS.length; i += 1) {
       var producer = PRODUCERS[i];
       var owned = state.producersOwned[producer.id] || 0;
       totalOwned += owned;
-      if (producer.type === "ritual" && owned > 0) {
-        hasRitualOwned = true;
+      if (producer.type === "ritual") {
+        ritualOwnedCount += owned;
       }
+    }
+
+    var upgradesOwned = 0;
+    if (state.purchasedUpgrades && typeof state.purchasedUpgrades.size === "number") {
+      upgradesOwned = state.purchasedUpgrades.size;
     }
 
     var stage = 0;
 
-    if (totalOwned >= 1) {
+    // Stage 1: the moment you have any automation or upgrade at all.
+    if (totalOwned >= 1 || upgradesOwned >= 1) {
       stage = 1;
     }
-    if (totalOwned >= 25) {
+    // Stage 2: shops and upgrades begin to dominate your day-to-day.
+    if (totalOwned >= 10 || upgradesOwned >= 3) {
       stage = 2;
     }
-    if (state.flags && state.flags.dyslexiaUnlocked) {
+    // Stage 3: fully industrialized; quotas are the air you breathe.
+    if (totalOwned >= 25 || upgradesOwned >= 8) {
       stage = 3;
     }
-    if (hasRitualOwned) {
+    // Stage 4: you've unlocked the dyslexia flag and started reading the fine print wrong/right.
+    if (state.flags && state.flags.dyslexiaUnlocked) {
       stage = 4;
+    }
+    // Stage 5: you actually own ritual producers; the bargains are active infrastructure.
+    if (ritualOwnedCount >= 1) {
+      stage = 5;
+    }
+    // Stage 6: gates open while rituals run; the line between Santa and Satan blurs completely.
+    if (ritualOwnedCount >= 1 && state.gates && state.gates.open) {
+      stage = 6;
     }
 
     if (stage < 0) stage = 0;
