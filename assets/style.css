@@ -20,6 +20,7 @@ body {
   color: #0b1120;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* Gates open: full red inferno mode */
@@ -188,7 +189,7 @@ main {
 main.game-shell {
   max-width: none;
   width: auto;
-  margin: 1rem 1rem 0 1rem;
+  margin: 0 1rem 0 1rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 2fr);
   grid-template-rows: minmax(0, 1fr);
@@ -199,7 +200,8 @@ main.game-shell {
   padding-bottom: 1rem;
   flex: 1 1 auto;
   min-height: 0;
-  overflow:}
+  overflow: hidden;
+}
 
 .game-left,
 .game-right {
@@ -208,6 +210,7 @@ main.game-shell {
   gap: 1.1rem;
   align-items: stretch;
   min-height: 0;
+  overflow: hidden;
 }
 
 .story-panel {
