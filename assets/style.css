@@ -201,6 +201,7 @@ main.game-shell {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+  align-items: stretch;
 }
 
 .story-panel {
@@ -208,6 +209,9 @@ main.game-shell {
   border-radius: 16px;
   padding: 1.1rem 1.2rem 1.1rem;
   border: 1px solid rgba(190, 24, 93, 0.25);
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .story-panel h2 {
@@ -225,7 +229,8 @@ main.game-shell {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  margin-top: 0.2rem;
+  margin-top: auto;
+}
 }
 
 .stat {
@@ -301,7 +306,7 @@ main.game-shell {
   background: rgba(15, 23, 42, 0.92);
   color: #fefce8;
   box-shadow: 0 10px 25px rgba(15,23,42,0.9);
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-height: 180px;
   max-height: 220px;
   overflow-y: auto;
@@ -475,7 +480,8 @@ main.game-shell {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  max-height: 260px;
+  flex: 1 1 auto;
+ ;
   overflow-y: auto;
 }
 
