@@ -33,10 +33,20 @@
   var finished = false;
   var promptText = "";
 
+  function renderPrompt() {
+    promptEl.innerHTML = "";
+    for (var i = 0; i < promptText.length; i++) {
+      var span = document.createElement("span");
+      span.textContent = promptText[i];
+      span.className = "char char-untyped";
+      promptEl.appendChild(span);
+    }
+  }
+
   function pickPrompt() {
     var index = Math.floor(Math.random() * prompts.length);
     promptText = prompts[index];
-    promptEl.textContent = promptText;
+    renderPrompt();
   }
 
   function formatTime(ms) {
@@ -74,6 +84,50 @@
       wpm: Math.max(0, Math.round(wpm)),
       accuracy: Math.max(0, Math.min(100, Math.round(accuracy)))
     };
+  }
+
+  function updateOverlay() {
+    var typed = inputEl.value || "";
+
+    // Sanitize: single line, cap length to prompt length
+    if (typed.indexOf("\n") !== -1) {
+      typed = typed.replace(/\n/g, "");
+      inputEl.value = typed;
+    }
+    if (typed.length > promptText.length) {
+      typed = typed.slice(0, promptText.length);
+      inputEl.value = typed;
+    }
+
+    var children = promptEl.childNodes;
+    var total = children.length;
+
+    for (var i = 0; i < total; i++) {
+      var span = children[i];
+      var className = "char";
+      if (i < typed.length) {
+        if (typed[i] === promptText[i]) {
+          className += " char-correct";
+        } else {
+          className += " char-incorrect";
+        }
+      } else {
+        className += " char-untyped";
+      }
+      span.className = className;
+    }
+
+    // Caret indicator at current position
+    var caretIndex = typed.length;
+    if (caretIndex >= total) {
+      caretIndex = total - 1;
+    }
+    if (caretIndex >= 0) {
+      var caretSpan = children[caretIndex];
+      if (caretSpan) {
+        caretSpan.className += " char-current";
+      }
+    }
   }
 
   function updateStatsDisplay() {
@@ -121,6 +175,7 @@
     inputEl.focus();
     startBtn.disabled = true;
     pickPrompt();
+    updateOverlay();
     updateTimeDisplay();
     updateStatsDisplay();
     startTimer();
@@ -164,12 +219,14 @@
     startBtn.disabled = false;
     resultsEl.textContent = "No runs yet – press Start to play.";
     pickPrompt();
+    updateOverlay();
   }
 
   function handleInput() {
     if (!started || finished) {
       return;
     }
+    updateOverlay();
     updateStatsDisplay();
   }
 
@@ -177,8 +234,14 @@
   resetBtn.addEventListener("click", resetGame);
   inputEl.addEventListener("input", handleInput);
 
+  promptEl.addEventListener("click", function () {
+    if (inputEl.disabled) return;
+    inputEl.focus();
+  });
+
   // Initial state
   pickPrompt();
+  updateOverlay();
   updateTimeDisplay();
   updateStatsDisplay();
 })();
