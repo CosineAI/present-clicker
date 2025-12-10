@@ -3,6 +3,14 @@
 
 window.PRESENT_CLICKER_UPGRADES = [
   {
+    id: "dyslexia",
+    name: "Dyslexia: ???",
+    description: "You misread \"Santa\" as \"Satan\" and keep reading.",
+    cost: 40000000,
+    effect: { type: "setFlag", flag: "dyslexiaUnlocked", value: true },
+    unlock: { pps: 1000000 }
+  },
+  {
     id: "better_gloves",
     name: "Padded Mittens",
     description: "Clicking hurts less. Doubles presents per click.",
@@ -241,13 +249,5 @@ window.PRESENT_CLICKER_UPGRADES = [
     cost: 900000000,
     effect: { type: "typeMultiplier", targetType: "assistant", value: 1.5 },
     unlock: { pps: 12000000 }
-  },
-  {
-    id: "dyslexia",
-    name: "Dyslexia: ???",
-    description: "You misread \"Santa\" as \"Satan\" and keep reading.",
-    cost: 40000000,
-    effect: { type: "setFlag", flag: "dyslexiaUnlocked", value: true },
-    unlock: { pps: 1000000 }
   }
 ];
