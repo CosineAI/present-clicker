@@ -165,9 +165,12 @@
   }
 
   function beginRun() {
-    if (started) return;
+    if (finished) {
+      resetGame();
+    }
 
-    started = true;
+    // Prepare a new run; actual timer starts on first keystroke.
+    started = false;
     finished = false;
     remainingMs = DURATION_SECONDS * 1000;
     inputEl.value = "";
@@ -178,7 +181,6 @@
     updateOverlay();
     updateTimeDisplay();
     updateStatsDisplay();
-    startTimer();
   }
 
   function finishRun() {
@@ -223,9 +225,18 @@
   }
 
   function handleInput() {
-    if (!started || finished) {
+    if (finished) {
       return;
     }
+
+    // Start the timer on the very first keystroke.
+    if (!started) {
+      started = true;
+      remainingMs = DURATION_SECONDS * 1000;
+      updateTimeDisplay();
+      startTimer();
+    }
+
     updateOverlay();
     updateStatsDisplay();
   }
