@@ -20,7 +20,7 @@ body {
   color: #0b1120;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* Gates open: full red inferno mode */
@@ -189,7 +189,7 @@ main.game-shell {
   padding-bottom: 1rem;
   flex: 1 1 auto;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .game-left,
@@ -199,7 +199,9 @@ main.game-shell {
   gap: 1.1rem;
   align-items: stretch;
   min-height: 0;
-  overflow: hidden;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .story-panel {
