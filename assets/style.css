@@ -765,7 +765,7 @@ footer {
 
 @media (max-width: 850px) {
   body {
-    overflow: auto;
+    overflow-y: auto;
   }
 
   main {
@@ -774,21 +774,14 @@ footer {
   }
 
   main.game-shell {
-    display: flex;
-    flex-direction: column;
+    display: block;        /* stop using grid/flex so children stack naturally */
     margin-top: 1.7rem;
+    flex: 0 0 auto;        /* let height be defined by content */
+    height: auto;
     overflow: visible;
   }
 
-  .game-right {
-    order: -1;
-  }
-
-  .game-left,
-  .game-right {
-    min-height: 100vh;
-    box-sizing: border-box;
-    overflow-y: auto;
+  .stats-y: auto;
     overflow-x: hidden;
   }
 
