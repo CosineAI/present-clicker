@@ -90,7 +90,7 @@ window.PRESENT_CLICKER_PRODUCERS = [
     baseCost: 500000000,
     costMultiplier: 1.32,
     basePps: 8000000,
-    unlockAtPps: 25000000,
+    unlockAtPps: 20000000,
     requiresFlag: "dyslexiaUnlocked"
   },
   {
@@ -102,7 +102,7 @@ window.PRESENT_CLICKER_PRODUCERS = [
     baseCost: 2500000000,
     costMultiplier: 1.35,
     basePps: 60000000,
-    unlockAtPps: 100000000,
+    unlockAtPps: 80000000,
     requiresFlag: "dyslexiaUnlocked"
   },
   {
@@ -114,7 +114,7 @@ window.PRESENT_CLICKER_PRODUCERS = [
     baseCost: 12000000000,
     costMultiplier: 1.38,
     basePps: 450000000,
-    unlockAtPps: 400000000,
+    unlockAtPps: 320000000,
     requiresFlag: "dyslexiaUnlocked"
   },
   {
@@ -126,7 +126,7 @@ window.PRESENT_CLICKER_PRODUCERS = [
     baseCost: 65000000000,
     costMultiplier: 1.42,
     basePps: 3000000000,
-    unlockAtPps: 2000000000,
+    unlockAtPps: 1300000000,
     requiresFlag: "dyslexiaUnlocked"
   }
 ];
