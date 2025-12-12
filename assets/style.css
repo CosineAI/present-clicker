@@ -8,6 +8,7 @@ body {
   height: 100vh;
   font-family: system-ui, sans-serif;
   margin: 0;
+  position: relative;
   background:
     radial-gradient(circle at top left, rgba(248, 250, 252, 0.4) 0, transparent 55%),
     repeating-linear-gradient(
@@ -21,6 +22,34 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+/* Gentle falling snow overlay */
+.snow-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 10px 10px, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(2px 2px at 80px 40px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(3px 3px at 130px 120px, rgba(255, 255, 255, 0.9), transparent);
+  background-size: 220px 220px, 260px 260px, 320px 320px;
+  opacity: 0.7;
+  animation: snow-fall 40s linear infinite;
+}
+
+body.gates-open .snow-overlay {
+  display: none;
+}
+
+@keyframes snow-fall {
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 700px, 0 640px, 0 580px;
+  }
 }
 
 /* Gates open: full red inferno mode */
