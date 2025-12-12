@@ -40,7 +40,6 @@
 
   var presentCountEl = document.getElementById("present-count");
   var ppsCountEl = document.getElementById("pps-count");
-  var ppcCountEl = document.getElementById("ppc-count");
   var presentButton = document.getElementById("present-button");
   var producersListEl = document.getElementById("producers-list");
   var upgradesListEl = document.getElementById("upgrades-list");
@@ -51,7 +50,7 @@
     ? settingsModal.querySelector(".settings-close-button")
     : null;
 
-  if (!presentButton || !presentCountEl || !ppsCountEl || !ppcCountEl) {
+  if (!presentButton || !presentCountEl || !ppsCountEl) {
     return;
   }
 
@@ -87,7 +86,6 @@
   function updateStatsUI() {
     presentCountEl.textContent = formatNumber(Math.floor(state.presents));
     ppsCountEl.textContent = formatNumber(state.presentsPerSecond);
-    ppcCountEl.textContent = formatNumber(state.presentsPerClick);
   }
 
   function updateProducersUI() {

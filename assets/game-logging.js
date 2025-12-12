@@ -991,7 +991,8 @@
   }
 
   function addLog(message) {
-    recentMessages.unshift(message);
+    // Keep messages in chronological order and render newest at the bottom.
+    recentMessages.push(message);
 
     if (!logListEl) return;
 
@@ -1001,6 +1002,12 @@
       li.textContent = msg;
       logListEl.appendChild(li);
     });
+
+    // Auto-scroll the visible log container so the latest entry is in view.
+    var container = logListEl.parentElement;
+    if (container && container.scrollHeight > container.clientHeight) {
+      container.scrollTop = container.scrollHeight;
+    }
   }
 
   function logProducerPurchase(producer, ownedCount) {

@@ -208,7 +208,7 @@ main.game-shell {
   padding: 0.5rem 0.5rem; /* 8px all around */
   border: 1px solid rgba(190, 24, 93, 0.25);
   flex: 2 1 auto; /* give story roughly double the flex height */
-  min-height: 0;
+  min-height: 160px; /* keep at least this tall even on roomy desktops */
   overflow-y: auto;
 }
 
@@ -225,34 +225,50 @@ main.game-shell {
 
 .stats-panel {
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem; /* slightly tighter stack */
   margin-top: auto;
 }
 
 .stat {
-  flex: 1 1 0;
+  flex: 1 1 auto;
   background: linear-gradient(135deg, #14532d, #166534); /* Christmas green */
   color: #fefce8;
-  padding: 0.6rem 0.75rem; /* a bit more compact */
+  padding: 0.45rem 0.75rem;
   border-radius: 12px;
   border: 1px solid rgba(248, 250, 252, 0.35);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.2rem;
+  text-align: right;
 }
 
-.stat-label {
+.stat-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.stat-label-inline {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.7;
+  opacity: 0.75;
+  text-align: left;
+}
+
+.stat-label-inline--secondary {
+  opacity: 0.6;
 }
 
 .stat-value {
   font-size: 1.05rem;
   font-weight: 700;
-  margin-top: 0.25rem;
+  text-align: right;
+  min-width: 6ch; /* keep numbers visually aligned in a right column */
 }
 
 /* Present button */
@@ -296,12 +312,12 @@ main.game-shell {
 /* Log */
 
 .log-panel {
-  margin-top: 0.9rem;
   padding: 0.7rem 0.9rem 0.75rem;
   border-radius: 12px;
   background: rgba(15, 23, 42, 0.92);
   color: #fefce8;
   flex: 0 0 auto;
+  min-height: 0 auto;
   min-height: 150px;
   max-height: 190px;
   overflow-y: auto;
@@ -762,18 +778,25 @@ footer {
 }
 
 @media (max-width: 850px) {
+  body {
+    overflow-y: auto;
+  }
+
   main {
     max-width: 98vw;
     padding: 1.2rem 1rem 1.3rem;
   }
 
   main.game-shell {
-    grid-template-columns: minmax(0, 1fr);
+    display: block;        /* stop using grid/flex so children stack naturally */
     margin-top: 1.7rem;
+    flex: 0 0 auto;        /* let height be defined by content */
+    height: auto;
+    overflow: visible;
   }
 
-  .game-right {
-    order: -1;
+  .game-left {
+    margin-bottom: 1.25rem; /* gap between left (top) and right (bottom) sections */
   }
 
   .stats-panel {
@@ -783,5 +806,10 @@ footer {
   .present-button {
     grid-template-columns: 1fr;
     row-gap: 0.35rem;
+  }
+
+  .story-panel {
+    height: 200px;      /* fixed height on small screens */
+    overflow-y: auto;   /* scroll internally when content is long */
   }
 }
