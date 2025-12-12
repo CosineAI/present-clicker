@@ -247,7 +247,9 @@ main.game-shell {
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  justify-content: space-between;
   gap: 0.4rem;
+  width: 100%;
 }
 
 .stat-label-inline {
@@ -255,6 +257,7 @@ main.game-shell {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.75;
+  text-align: left;
 }
 
 .stat-label-inline--secondary {
@@ -264,6 +267,8 @@ main.game-shell {
 .stat-value {
   font-size: 1.05rem;
   font-weight: 700;
+  text-align: right;
+  min-width: 6ch; /* keep numbers visually aligned in a right column */
 }
 
 /* Present button */
