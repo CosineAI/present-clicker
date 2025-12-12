@@ -199,9 +199,7 @@ main.game-shell {
   gap: 1.1rem;
   align-items: stretch;
   min-height: 0;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .story-panel {
@@ -795,14 +793,7 @@ footer {
   }
 
   .story-panel {
-    min-height: 200px; /* ensure story box is tall enough even on very short viewports */
-    max-height: 40vh;  /* cap height so it doesn't take over the screen */
-    overflow-y: auto;  /* ensure text scrolls instead of being cut off */
-  }
-}
-
-  .present-button {
-    grid-template-columns: 1fr;
-    row-gap: 0.35rem;
+    height: 200px;      /* fixed height on small screens */
+    overflow-y: auto;   /* scroll internally when content is long */
   }
 }
