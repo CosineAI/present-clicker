@@ -781,13 +781,24 @@ footer {
     overflow: visible;
   }
 
-  .stats-y: auto;
-    overflow-x: hidden;
+  .game-left {
+    margin-bottom: 1.25rem; /* gap between left (top) and right (bottom) sections */
   }
 
   .stats-panel {
     flex-direction: column;
   }
+
+  .present-button {
+    grid-template-columns: 1fr;
+    row-gap: 0.35rem;
+  }
+
+  .story-panel {
+    max-height: 40vh;  /* give story box a stable height on small screens */
+    overflow-y: auto;  /* ensure text scrolls instead of being cut off */
+  }
+}
 
   .present-button {
     grid-template-columns: 1fr;
