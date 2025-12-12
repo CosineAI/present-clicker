@@ -795,7 +795,8 @@ footer {
   }
 
   .story-panel {
-    max-height: 40vh;  /* give story box a stable height on small screens */
+    min-height: 300px; /* ensure story box is tall enough even on very short viewports */
+    max-height: 40vh;  /* cap height relative to viewport so it doesn't dominate */
     overflow-y: auto;  /* ensure text scrolls instead of being cut off */
   }
 }
